@@ -16,6 +16,9 @@ class Game {
     func startGame() {
         // On crée autant de joueurs que nécessaire
         createPlayer(countStart: 0)
+        for i in 0 ..< numberOfPlayers{
+            Players[i].creationHero(countStart: 0,creator:Players[i].name)
+        }
     }
     
     func createPlayer(countStart:Int) { // On crée un joueur pour la partie
@@ -44,7 +47,7 @@ class Game {
                 retour = answer
             }
             else {
-               // print("Identique")
+            print("Le nom est déjà pris")
                 //answer = ""
             }
  

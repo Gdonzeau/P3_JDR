@@ -19,6 +19,10 @@
 		0451BEF025E5AF1800FAA9F0 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEEF25E5AF1800FAA9F0 /* Game.swift */; };
 		0451BEF325E5AFD800FAA9F0 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEF225E5AFD800FAA9F0 /* Character.swift */; };
 		0451BEF625E5B26800FAA9F0 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEF525E5B26800FAA9F0 /* Player.swift */; };
+		0451BEFB25E5CC7900FAA9F0 /* Barbarian.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEFA25E5CC7900FAA9F0 /* Barbarian.swift */; };
+		0451BEFE25E5CD3300FAA9F0 /* Druid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEFD25E5CD3300FAA9F0 /* Druid.swift */; };
+		0451BF0125E5CD5500FAA9F0 /* Paladin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BF0025E5CD5500FAA9F0 /* Paladin.swift */; };
+		0451BF0425E5CD7300FAA9F0 /* Mage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BF0325E5CD7300FAA9F0 /* Mage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,6 +51,10 @@
 		0451BEEF25E5AF1800FAA9F0 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		0451BEF225E5AFD800FAA9F0 /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		0451BEF525E5B26800FAA9F0 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		0451BEFA25E5CC7900FAA9F0 /* Barbarian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Barbarian.swift; sourceTree = "<group>"; };
+		0451BEFD25E5CD3300FAA9F0 /* Druid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Druid.swift; sourceTree = "<group>"; };
+		0451BF0025E5CD5500FAA9F0 /* Paladin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paladin.swift; sourceTree = "<group>"; };
+		0451BF0325E5CD7300FAA9F0 /* Mage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +115,10 @@
 			isa = PBXGroup;
 			children = (
 				0451BEF225E5AFD800FAA9F0 /* Character.swift */,
+				0451BEFA25E5CC7900FAA9F0 /* Barbarian.swift */,
+				0451BEFD25E5CD3300FAA9F0 /* Druid.swift */,
+				0451BF0025E5CD5500FAA9F0 /* Paladin.swift */,
+				0451BF0325E5CD7300FAA9F0 /* Mage.swift */,
 			);
 			path = Characters;
 			sourceTree = "<group>";
@@ -170,16 +182,20 @@
 			files = (
 				0451BEE925E5AE7B00FAA9F0 /* Flail.swift in Sources */,
 				0451BEF025E5AF1800FAA9F0 /* Game.swift in Sources */,
+				0451BEFE25E5CD3300FAA9F0 /* Druid.swift in Sources */,
 				0451BEF325E5AFD800FAA9F0 /* Character.swift in Sources */,
 				0451BEEB25E5AE7B00FAA9F0 /* Dagger.swift in Sources */,
 				0451BEF625E5B26800FAA9F0 /* Player.swift in Sources */,
+				0451BF0125E5CD5500FAA9F0 /* Paladin.swift in Sources */,
 				0451BEE825E5AE7B00FAA9F0 /* Big Healing Spell.swift in Sources */,
 				0451BED625E5ADB700FAA9F0 /* main.swift in Sources */,
+				0451BEFB25E5CC7900FAA9F0 /* Barbarian.swift in Sources */,
 				0451BEE525E5AE7B00FAA9F0 /* Weapons.swift in Sources */,
 				0451BEEA25E5AE7B00FAA9F0 /* Hammer.swift in Sources */,
 				0451BEE725E5AE7B00FAA9F0 /* Healing Spell.swift in Sources */,
 				0451BEE625E5AE7B00FAA9F0 /* Axe.swift in Sources */,
 				0451BEEC25E5AE7B00FAA9F0 /* Sword.swift in Sources */,
+				0451BF0425E5CD7300FAA9F0 /* Mage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
