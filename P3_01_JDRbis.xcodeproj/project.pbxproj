@@ -8,6 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		0451BED625E5ADB700FAA9F0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BED525E5ADB700FAA9F0 /* main.swift */; };
+		0451BEE525E5AE7B00FAA9F0 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEDD25E5AE7B00FAA9F0 /* Weapons.swift */; };
+		0451BEE625E5AE7B00FAA9F0 /* Axe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEDE25E5AE7B00FAA9F0 /* Axe.swift */; };
+		0451BEE725E5AE7B00FAA9F0 /* Healing Spell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEDF25E5AE7B00FAA9F0 /* Healing Spell.swift */; };
+		0451BEE825E5AE7B00FAA9F0 /* Big Healing Spell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEE025E5AE7B00FAA9F0 /* Big Healing Spell.swift */; };
+		0451BEE925E5AE7B00FAA9F0 /* Flail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEE125E5AE7B00FAA9F0 /* Flail.swift */; };
+		0451BEEA25E5AE7B00FAA9F0 /* Hammer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEE225E5AE7B00FAA9F0 /* Hammer.swift */; };
+		0451BEEB25E5AE7B00FAA9F0 /* Dagger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEE325E5AE7B00FAA9F0 /* Dagger.swift */; };
+		0451BEEC25E5AE7B00FAA9F0 /* Sword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEE425E5AE7B00FAA9F0 /* Sword.swift */; };
+		0451BEF025E5AF1800FAA9F0 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEEF25E5AF1800FAA9F0 /* Game.swift */; };
+		0451BEF325E5AFD800FAA9F0 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEF225E5AFD800FAA9F0 /* Character.swift */; };
+		0451BEF625E5B26800FAA9F0 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEF525E5B26800FAA9F0 /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +36,17 @@
 /* Begin PBXFileReference section */
 		0451BED225E5ADB700FAA9F0 /* P3_01_JDRbis */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = P3_01_JDRbis; sourceTree = BUILT_PRODUCTS_DIR; };
 		0451BED525E5ADB700FAA9F0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		0451BEDD25E5AE7B00FAA9F0 /* Weapons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
+		0451BEDE25E5AE7B00FAA9F0 /* Axe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Axe.swift; sourceTree = "<group>"; };
+		0451BEDF25E5AE7B00FAA9F0 /* Healing Spell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Healing Spell.swift"; sourceTree = "<group>"; };
+		0451BEE025E5AE7B00FAA9F0 /* Big Healing Spell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Big Healing Spell.swift"; sourceTree = "<group>"; };
+		0451BEE125E5AE7B00FAA9F0 /* Flail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Flail.swift; sourceTree = "<group>"; };
+		0451BEE225E5AE7B00FAA9F0 /* Hammer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hammer.swift; sourceTree = "<group>"; };
+		0451BEE325E5AE7B00FAA9F0 /* Dagger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dagger.swift; sourceTree = "<group>"; };
+		0451BEE425E5AE7B00FAA9F0 /* Sword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sword.swift; sourceTree = "<group>"; };
+		0451BEEF25E5AF1800FAA9F0 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		0451BEF225E5AFD800FAA9F0 /* Character.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		0451BEF525E5B26800FAA9F0 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +79,36 @@
 		0451BED425E5ADB700FAA9F0 /* P3_01_JDRbis */ = {
 			isa = PBXGroup;
 			children = (
+				0451BEEE25E5AE9A00FAA9F0 /* Weapons */,
+				0451BEF825E5B39100FAA9F0 /* Characters */,
 				0451BED525E5ADB700FAA9F0 /* main.swift */,
+				0451BEEF25E5AF1800FAA9F0 /* Game.swift */,
+				0451BEF525E5B26800FAA9F0 /* Player.swift */,
 			);
 			path = P3_01_JDRbis;
+			sourceTree = "<group>";
+		};
+		0451BEEE25E5AE9A00FAA9F0 /* Weapons */ = {
+			isa = PBXGroup;
+			children = (
+				0451BEDD25E5AE7B00FAA9F0 /* Weapons.swift */,
+				0451BEDE25E5AE7B00FAA9F0 /* Axe.swift */,
+				0451BEE025E5AE7B00FAA9F0 /* Big Healing Spell.swift */,
+				0451BEE325E5AE7B00FAA9F0 /* Dagger.swift */,
+				0451BEE125E5AE7B00FAA9F0 /* Flail.swift */,
+				0451BEE225E5AE7B00FAA9F0 /* Hammer.swift */,
+				0451BEDF25E5AE7B00FAA9F0 /* Healing Spell.swift */,
+				0451BEE425E5AE7B00FAA9F0 /* Sword.swift */,
+			);
+			path = Weapons;
+			sourceTree = "<group>";
+		};
+		0451BEF825E5B39100FAA9F0 /* Characters */ = {
+			isa = PBXGroup;
+			children = (
+				0451BEF225E5AFD800FAA9F0 /* Character.swift */,
+			);
+			path = Characters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,7 +168,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0451BEE925E5AE7B00FAA9F0 /* Flail.swift in Sources */,
+				0451BEF025E5AF1800FAA9F0 /* Game.swift in Sources */,
+				0451BEF325E5AFD800FAA9F0 /* Character.swift in Sources */,
+				0451BEEB25E5AE7B00FAA9F0 /* Dagger.swift in Sources */,
+				0451BEF625E5B26800FAA9F0 /* Player.swift in Sources */,
+				0451BEE825E5AE7B00FAA9F0 /* Big Healing Spell.swift in Sources */,
 				0451BED625E5ADB700FAA9F0 /* main.swift in Sources */,
+				0451BEE525E5AE7B00FAA9F0 /* Weapons.swift in Sources */,
+				0451BEEA25E5AE7B00FAA9F0 /* Hammer.swift in Sources */,
+				0451BEE725E5AE7B00FAA9F0 /* Healing Spell.swift in Sources */,
+				0451BEE625E5AE7B00FAA9F0 /* Axe.swift in Sources */,
+				0451BEEC25E5AE7B00FAA9F0 /* Sword.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
