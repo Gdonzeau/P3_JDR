@@ -13,20 +13,22 @@ class Game {
     
     var numberOfPlayers = 2 // Combien de joueurs dans une partie
     
-    func startGame() {
+    func startGame() { // Déroulement de la parti
         // On crée autant de joueurs que nécessaire
         createPlayer(countStart: 0)
         // Puis on crée autant de héros que nécessaire
         for i in 0 ..< numberOfPlayers{
             Players[i].creationHero(countStart: 0,creator:Players[i].name, job: "")
         }
+        // On décide qui commence
+        throwCoin()
     }
     
     func createPlayer(countStart:Int) { // On crée un joueur pour la partie
         for i in countStart ..< numberOfPlayers {
             Players.append(Player.init(name: giveNamePlayer(number: i)))
             if Players[i].name == "" {
-                // On supprime la case et on relance la fonction
+                
                 Players.remove(at: i)
                 createPlayer(countStart: i)
                 break
@@ -44,15 +46,11 @@ class Game {
         if let answer = readLine() {
             
             if checkNamePlayer(nameToCheck:answer) {
-              //  print("Nom différent")
                 retour = answer
             }
             else {
-            print("Le nom est déjà pris")
-                //answer = ""
+                print("Le nom est déjà pris")
             }
- 
-            //retour = answer
         }
         return retour
     }
@@ -65,5 +63,22 @@ class Game {
             }
         }
         return nameDontExist
+    }
+    
+    func presentEveryBody() {
+        for i in 0 ..< numberOfPlayers {
+            print("\nVoici \(Players[i].name).",
+                  "\nIl possède \(Player.numberOfHeroes) personnages :")
+            for j in 0 ..< Player.numberOfHeroes {
+                print("\n- \(Players[i].heroes[j].classe) qui nous a déclaré :")
+                Players[i].heroes[j].presentHimSelf()
+            }
+        }
+    }
+    
+    func throwCoin() {
+        let pièce = Int(arc4random_uniform(UInt32(2))) // On lance une pièce pour savoir qui commence
+        print("\(Players[pièce].name) commence.")
+        Players[pièce].myGo = true
     }
 }

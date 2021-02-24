@@ -11,6 +11,8 @@ class Player {
     static var playerNamesUsed = [String]()
     static var numberOfHeroes:Int = 3
     
+    var myGo = false // À qui est-ce le tour de jouer
+    
     var heroes = [Character]()
     
     var name:String
@@ -107,8 +109,8 @@ class Player {
                 
             }
             
-            let test = Int(career)! // On force le déballage de l'optionnel, mais on est sûr qu'il s'agit de 1, 2, 3 ou 4.
-            print(test)
+            //let test = Int(career)! // On force le déballage de l'optionnel, mais on est sûr qu'il s'agit de 1, 2, 3 ou 4.
+            //print(test)
             career = ""
             
         }
@@ -134,7 +136,6 @@ class Player {
     }
     
     func choiceWeapon(career:String) -> Weapon {
-        // var retour = Weapon()
         var retour = Weapon()
         var nameRetour = ""
         var choice = [Weapon]() // On fait un tableau des armes existantes et autorisées en fonction de la classe du perso
@@ -171,15 +172,8 @@ class Player {
             // Faire deux choix : correct et incorrect avec .count
             for test in possibilities {
                 if test+1 == Int(answer) {
-                    //nameRetour = choice[Int(answer)!-1].name
                     nameRetour = choice[test].name
                 }
-                /*
-                else {
-                    print("Je n'ai pas compris, veuillez refaire votre choix.")
-                    break
-                }
-                */
             }
         }
         retour = defineWeapons(name: nameRetour)
@@ -205,7 +199,6 @@ class Player {
             retour = Sword()
         default :
             retour = SmallClub()
-            
         }
         return retour
     }
@@ -217,16 +210,12 @@ class Player {
         if let answer = readLine() {
             
             if checkNameHero(nameToCheck:answer) {
-                //  print("Nom différent")
                 retour = answer
                 Character.heroNamesUsed += [retour]
             }
             else {
                 print("Le nom est déjà pris")
-                //answer = ""
             }
-            
-            //retour = answer
         }
         return retour
     }

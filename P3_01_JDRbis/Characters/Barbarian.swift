@@ -9,5 +9,10 @@ import Foundation
 
 class Barbarian: Character {
     override var HPClass:Int { 120 }
-  
+    override var classe:String { "un barbare" }
+    override var hobby:String { "taper sur les gens" }
+    override func presentHimSelf() {
+        super.presentHimSelf()
+        print("Et c'est chouette.")
+    }
 }
