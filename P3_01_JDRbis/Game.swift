@@ -11,13 +11,13 @@ class Game {
     
     var Players = [Player]()
     
-    var numberOfPlayers = 5 // Combien de joueurs dans une partie
+    var numberOfPlayers = 2 // Combien de joueurs dans une partie
     
     func startGame() {
         // On crée autant de joueurs que nécessaire
         createPlayer(countStart: 0)
         for i in 0 ..< numberOfPlayers{
-            Players[i].creationHero(countStart: 0,creator:Players[i].name)
+            Players[i].creationHero(countStart: 0,creator:Players[i].name, job: "")
         }
     }
     
