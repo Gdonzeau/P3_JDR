@@ -36,6 +36,12 @@ class Player {
                 while heroes[i].name == "" {
                     heroes[i].name = giveNameHero(number: i,creator:creator)
                 }
+                
+                while heroes[i].weapon.name == "un petit bâton" {
+                    print("Commande incorrecte")
+                    heroes[i].weapon = choiceWeapon(career: career)
+                }
+                
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
                 
@@ -44,6 +50,11 @@ class Player {
                 
                 while heroes[i].name == "" {
                     heroes[i].name = giveNameHero(number: i,creator:creator)
+                }
+                
+                while heroes[i].weapon.name == "un petit bâton" {
+                    print("Commande incorrecte")
+                    heroes[i].weapon = choiceWeapon(career: career)
                 }
                 
                 print("Bonjour \(heroes[i].name)")
@@ -55,6 +66,12 @@ class Player {
                 while heroes[i].name == "" {
                     heroes[i].name = giveNameHero(number: i,creator:creator)
                 }
+                
+                while heroes[i].weapon.name == "un petit bâton" {
+                    print("Commande incorrecte")
+                    heroes[i].weapon = choiceWeapon(career: career)
+                }
+                
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
                 
@@ -64,6 +81,12 @@ class Player {
                 while heroes[i].name == "" {
                     heroes[i].name = giveNameHero(number: i,creator:creator)
                 }
+                
+                while heroes[i].weapon.name == "un petit bâton" {
+                    print("Commande incorrecte")
+                    heroes[i].weapon = choiceWeapon(career: career)
+                }
+                
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
                 
@@ -72,6 +95,11 @@ class Player {
                 
                 while heroes[i].name == "" {
                     heroes[i].name = giveNameHero(number: i,creator:creator)
+                }
+                
+                while heroes[i].weapon.name == "un petit bâton" {
+                    print("Commande incorrecte")
+                    heroes[i].weapon = choiceWeapon(career: career)
                 }
                 
                 print("Bonjour \(heroes[i].name)")
@@ -106,45 +134,52 @@ class Player {
     }
     
     func choiceWeapon(career:String) -> Weapon {
-       // var retour = Weapon()
+        // var retour = Weapon()
         var retour = Weapon()
         var nameRetour = ""
         var choice = [Weapon]() // On fait un tableau des armes existantes et autorisées en fonction de la classe du perso
         for i in 0 ..< Weapon.allWeapons.count {
             if career == "1" { // Armes autorisées pour le Barbare
-               if Weapon.allWeapons[i].barbarianAuthorized {
-            choice += [Weapon.allWeapons[i]]
+                if Weapon.allWeapons[i].barbarianAuthorized {
+                    choice += [Weapon.allWeapons[i]]
                 }
             }
             if career == "2" { // Armes autorisées pour le Barbare
-               if Weapon.allWeapons[i].paladinAuthorized {
-            choice += [Weapon.allWeapons[i]]
+                if Weapon.allWeapons[i].paladinAuthorized {
+                    choice += [Weapon.allWeapons[i]]
                 }
             }
             if career == "3" { // Armes autorisées pour le Barbare
-               if Weapon.allWeapons[i].druidAuthorized {
-            choice += [Weapon.allWeapons[i]]
+                if Weapon.allWeapons[i].druidAuthorized {
+                    choice += [Weapon.allWeapons[i]]
                 }
             }
             if career == "4" { // Armes autorisées pour le Barbare
-               if Weapon.allWeapons[i].mageAuthorized {
-            choice += [Weapon.allWeapons[i]]
+                if Weapon.allWeapons[i].mageAuthorized {
+                    choice += [Weapon.allWeapons[i]]
                 }
             }
         }
         print("Vous pouvez choisir un équipement :")
+        
+        var possibilities = [Int]()
         for i in 0..<choice.count {
             print("\n\([i+1]). \(choice[i].name)")
+            possibilities += [i]
         }
         if let answer = readLine() {
-            
-            nameRetour = choice[Int(answer)!-1].name
-            if answer == "1" || answer == "2" || answer == "3" || answer == "4" {
-                //self.retour.name = choice[Int(answer)!].name
-                print("Compris")
-            }
-            else {
-                print("Je n'ai pas compris, veuillez refaire votre choix.")
+            // Faire deux choix : correct et incorrect avec .count
+            for test in possibilities {
+                if test+1 == Int(answer) {
+                    //nameRetour = choice[Int(answer)!-1].name
+                    nameRetour = choice[test].name
+                }
+                /*
+                else {
+                    print("Je n'ai pas compris, veuillez refaire votre choix.")
+                    break
+                }
+                */
             }
         }
         retour = defineWeapons(name: nameRetour)
@@ -155,7 +190,7 @@ class Player {
         var retour = Weapon()
         switch name {
         case "une hache":
-        retour = Axe()
+            retour = Axe()
         case "un sort de soin majeur":
             retour = BigHealingSpell()
         case "une dague":
