@@ -23,26 +23,34 @@ class Player {
     func creationHero(countStart:Int,creator:String,job:String) {
         var career = job
         for i in countStart ..< Player.numberOfHeroes {
-            
+            /*
             if career == "" {
                 career = choiceClassnumber(number: i, creator: creator)
             }
-            
+            */
             while career == "" { // Tant que la réponse n'est pas compréhensible, on redemande
                 career = choiceClassnumber(number: i, creator: creator)
             }
             switch career {
             case "1":
                 heroes.append(Barbarian.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon()))
+                 while heroes[i].name == "" {
+                
+                    heroes[i].name = giveNameHero(number: i,creator:creator)
+                 
+                }
+                /*
                 if heroes[i].name == "" {
+                    print("Marche pas")
                     // On supprime la case et on relance la fonction
                     heroes.remove(at: i)
                     creationHero(countStart: i,creator:creator,job:career)
                     break
                 }
-                else {
+                */
+                //else {
                     print("Bonjour \(heroes[i].name)")
-                }
+                //}
             case "2":
                 heroes.append(Paladin.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon()))
                 if heroes[i].name == "" {
@@ -86,7 +94,7 @@ class Player {
                 }
             }
             career = ""
-              //  print("Bonjour \(heroes[i].name)")
+            
         }
     }
     
@@ -123,6 +131,7 @@ class Player {
             if checkNameHero(nameToCheck:answer) {
                 //  print("Nom différent")
                 retour = answer
+                Character.heroNamesUsed += [retour]
             }
             else {
                 print("Le nom est déjà pris")
