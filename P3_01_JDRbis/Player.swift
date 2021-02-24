@@ -23,11 +23,7 @@ class Player {
     func creationHero(countStart:Int,creator:String,job:String) {
         var career = job
         for i in countStart ..< Player.numberOfHeroes {
-            /*
-            if career == "" {
-                career = choiceClassnumber(number: i, creator: creator)
-            }
-            */
+            
             while career == "" { // Tant que la réponse n'est pas compréhensible, on redemande
                 career = choiceClassnumber(number: i, creator: creator)
             }
@@ -35,63 +31,43 @@ class Player {
             case "1":
                 heroes.append(Barbarian.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon()))
                  while heroes[i].name == "" {
-                
                     heroes[i].name = giveNameHero(number: i,creator:creator)
-                 
                 }
-                /*
-                if heroes[i].name == "" {
-                    print("Marche pas")
-                    // On supprime la case et on relance la fonction
-                    heroes.remove(at: i)
-                    creationHero(countStart: i,creator:creator,job:career)
-                    break
-                }
-                */
-                //else {
                     print("Bonjour \(heroes[i].name)")
-                //}
+
             case "2":
                 heroes.append(Paladin.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon()))
-                if heroes[i].name == "" {
-                    // On supprime la case et on relance la fonction
-                    heroes.remove(at: i)
-                    creationHero(countStart: i,creator:creator,job: career)
-                    break
-                }
-                else {
-                    print("Bonjour \(heroes[i].name)")
-                }
+                
+                while heroes[i].name == "" {
+                   heroes[i].name = giveNameHero(number: i,creator:creator)
+               }
+                
+                   print("Bonjour \(heroes[i].name)")
             case "3":
                 heroes.append(Druid.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon()))
-                if heroes[i].name == "" {
-                    // On supprime la case et on relance la fonction
-                    heroes.remove(at: i)
-                    creationHero(countStart: i,creator:creator,job: career)
-                    break
-                }
-                else {
-                    print("Bonjour \(heroes[i].name)")
-                }
+                
+                while heroes[i].name == "" {
+                   heroes[i].name = giveNameHero(number: i,creator:creator)
+               }
+                   print("Bonjour \(heroes[i].name)")
+                
             case "4":
                 heroes.append(Mage.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon()))
-                if heroes[i].name == "" {
-                    // On supprime la case et on relance la fonction
-                    heroes.remove(at: i)
-                    creationHero(countStart: i,creator:creator,job: career)
-                    break
-                }
-                else {
-                    print("Bonjour \(heroes[i].name)")
-                }
+                
+                while heroes[i].name == "" {
+                   heroes[i].name = giveNameHero(number: i,creator:creator)
+               }
+                   print("Bonjour \(heroes[i].name)")
+                
             default:
                 heroes.append(Character.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon()))
-                if heroes[i].name == "" {
-                    // On supprime la case et on relance la fonction
-                    heroes.remove(at: i)
-                    creationHero(countStart: i,creator:creator,job: career)
-                    break
-                }
+                
+                while heroes[i].name == "" {
+                   heroes[i].name = giveNameHero(number: i,creator:creator)
+               }
+                
+                   print("Bonjour \(heroes[i].name)")
+                
             }
             career = ""
             

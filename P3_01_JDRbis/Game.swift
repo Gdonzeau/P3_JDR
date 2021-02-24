@@ -16,6 +16,7 @@ class Game {
     func startGame() {
         // On crée autant de joueurs que nécessaire
         createPlayer(countStart: 0)
+        // Puis on crée autant de héros que nécessaire
         for i in 0 ..< numberOfPlayers{
             Players[i].creationHero(countStart: 0,creator:Players[i].name, job: "")
         }
