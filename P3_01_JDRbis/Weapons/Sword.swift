@@ -16,3 +16,4 @@ class Sword:Weapon {
     override var paladinAuthorized:Bool { true }
     override var mageAuthorized:Bool { false }
 }
+

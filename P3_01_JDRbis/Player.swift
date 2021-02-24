@@ -29,46 +29,58 @@ class Player {
             }
             switch career {
             case "1":
-                heroes.append(Barbarian.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon()))
-                 while heroes[i].name == "" {
+                //heroes.append(Character.allClasses[0])
+                
+                heroes.append(Barbarian.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon(career:career)))
+                
+                while heroes[i].name == "" {
                     heroes[i].name = giveNameHero(number: i,creator:creator)
                 }
-                    print("Bonjour \(heroes[i].name)")
-
+                print("Bonjour \(heroes[i].name)")
+                heroes[i].HPInGame = heroes[i].HPClass
+                
             case "2":
-                heroes.append(Paladin.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon()))
+                heroes.append(Paladin.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon(career: career)))
                 
                 while heroes[i].name == "" {
-                   heroes[i].name = giveNameHero(number: i,creator:creator)
-               }
+                    heroes[i].name = giveNameHero(number: i,creator:creator)
+                }
                 
-                   print("Bonjour \(heroes[i].name)")
+                print("Bonjour \(heroes[i].name)")
+                heroes[i].HPInGame = heroes[i].HPClass
+                
             case "3":
-                heroes.append(Druid.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon()))
+                heroes.append(Druid.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon(career: career)))
                 
                 while heroes[i].name == "" {
-                   heroes[i].name = giveNameHero(number: i,creator:creator)
-               }
-                   print("Bonjour \(heroes[i].name)")
+                    heroes[i].name = giveNameHero(number: i,creator:creator)
+                }
+                print("Bonjour \(heroes[i].name)")
+                heroes[i].HPInGame = heroes[i].HPClass
                 
             case "4":
-                heroes.append(Mage.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon()))
+                heroes.append(Mage.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon(career: career)))
                 
                 while heroes[i].name == "" {
-                   heroes[i].name = giveNameHero(number: i,creator:creator)
-               }
-                   print("Bonjour \(heroes[i].name)")
+                    heroes[i].name = giveNameHero(number: i,creator:creator)
+                }
+                print("Bonjour \(heroes[i].name)")
+                heroes[i].HPInGame = heroes[i].HPClass
                 
             default:
-                heroes.append(Character.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon()))
+                heroes.append(Character.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon(career: career)))
                 
                 while heroes[i].name == "" {
-                   heroes[i].name = giveNameHero(number: i,creator:creator)
-               }
+                    heroes[i].name = giveNameHero(number: i,creator:creator)
+                }
                 
-                   print("Bonjour \(heroes[i].name)")
+                print("Bonjour \(heroes[i].name)")
+                heroes[i].HPInGame = heroes[i].HPClass
                 
             }
+            
+            let test = Int(career)! // On force le déballage de l'optionnel, mais on est sûr qu'il s'agit de 1, 2, 3 ou 4.
+            print(test)
             career = ""
             
         }
@@ -93,8 +105,73 @@ class Player {
         return retour
     }
     
-    func choiceWeapon() -> Weapon {
+    func choiceWeapon(career:String) -> Weapon {
+       // var retour = Weapon()
         var retour = Weapon()
+        var nameRetour = ""
+        var choice = [Weapon]() // On fait un tableau des armes existantes et autorisées en fonction de la classe du perso
+        for i in 0 ..< Weapon.allWeapons.count {
+            if career == "1" { // Armes autorisées pour le Barbare
+               if Weapon.allWeapons[i].barbarianAuthorized {
+            choice += [Weapon.allWeapons[i]]
+                }
+            }
+            if career == "2" { // Armes autorisées pour le Barbare
+               if Weapon.allWeapons[i].paladinAuthorized {
+            choice += [Weapon.allWeapons[i]]
+                }
+            }
+            if career == "3" { // Armes autorisées pour le Barbare
+               if Weapon.allWeapons[i].druidAuthorized {
+            choice += [Weapon.allWeapons[i]]
+                }
+            }
+            if career == "4" { // Armes autorisées pour le Barbare
+               if Weapon.allWeapons[i].mageAuthorized {
+            choice += [Weapon.allWeapons[i]]
+                }
+            }
+        }
+        print("Vous pouvez choisir un équipement :")
+        for i in 0..<choice.count {
+            print("\n\([i+1]). \(choice[i].name)")
+        }
+        if let answer = readLine() {
+            
+            nameRetour = choice[Int(answer)!-1].name
+            if answer == "1" || answer == "2" || answer == "3" || answer == "4" {
+                //self.retour.name = choice[Int(answer)!].name
+                print("Compris")
+            }
+            else {
+                print("Je n'ai pas compris, veuillez refaire votre choix.")
+            }
+        }
+        retour = defineWeapons(name: nameRetour)
+        return retour
+    }
+    
+    func defineWeapons(name:String) ->Weapon {
+        var retour = Weapon()
+        switch name {
+        case "une hache":
+        retour = Axe()
+        case "un sort de soin majeur":
+            retour = BigHealingSpell()
+        case "une dague":
+            retour = Dagger()
+        case "un fléau":
+            retour = Flail()
+        case "un marteau":
+            retour = Hammer()
+        case "un sort de soin":
+            retour = HealingSpell()
+        case "une épée":
+            retour = Sword()
+        default :
+            retour = SmallClub()
+            
+        }
         return retour
     }
     

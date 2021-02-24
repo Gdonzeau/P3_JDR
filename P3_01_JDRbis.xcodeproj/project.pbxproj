@@ -23,6 +23,7 @@
 		0451BEFE25E5CD3300FAA9F0 /* Druid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BEFD25E5CD3300FAA9F0 /* Druid.swift */; };
 		0451BF0125E5CD5500FAA9F0 /* Paladin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BF0025E5CD5500FAA9F0 /* Paladin.swift */; };
 		0451BF0425E5CD7300FAA9F0 /* Mage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BF0325E5CD7300FAA9F0 /* Mage.swift */; };
+		0451BF0A25E6C02A00FAA9F0 /* SmallClub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BF0925E6C02A00FAA9F0 /* SmallClub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +56,7 @@
 		0451BEFD25E5CD3300FAA9F0 /* Druid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Druid.swift; sourceTree = "<group>"; };
 		0451BF0025E5CD5500FAA9F0 /* Paladin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paladin.swift; sourceTree = "<group>"; };
 		0451BF0325E5CD7300FAA9F0 /* Mage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mage.swift; sourceTree = "<group>"; };
+		0451BF0925E6C02A00FAA9F0 /* SmallClub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallClub.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				0451BEE225E5AE7B00FAA9F0 /* Hammer.swift */,
 				0451BEDF25E5AE7B00FAA9F0 /* Healing Spell.swift */,
 				0451BEE425E5AE7B00FAA9F0 /* Sword.swift */,
+				0451BF0925E6C02A00FAA9F0 /* SmallClub.swift */,
 			);
 			path = Weapons;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				0451BEE925E5AE7B00FAA9F0 /* Flail.swift in Sources */,
 				0451BEF025E5AF1800FAA9F0 /* Game.swift in Sources */,
 				0451BEFE25E5CD3300FAA9F0 /* Druid.swift in Sources */,
+				0451BF0A25E6C02A00FAA9F0 /* SmallClub.swift in Sources */,
 				0451BEF325E5AFD800FAA9F0 /* Character.swift in Sources */,
 				0451BEEB25E5AE7B00FAA9F0 /* Dagger.swift in Sources */,
 				0451BEF625E5B26800FAA9F0 /* Player.swift in Sources */,

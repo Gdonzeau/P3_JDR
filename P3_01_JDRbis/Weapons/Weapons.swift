@@ -8,6 +8,7 @@
 import Foundation
 
 class Weapon {
+    static var allWeapons = [Axe(),BigHealingSpell(),Dagger(),Flail(),Hammer(),HealingSpell(),Sword()]
     
     var name:String {
         get {
