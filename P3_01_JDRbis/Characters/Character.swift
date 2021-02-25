@@ -8,7 +8,7 @@
 import Foundation
 
 class Character {
-    static var allClasses = ["Barbare","Druide","Paladin","Mage"] // Boucle for. Utliser i. Quand i=name, créer la classe ainsi sélectionnée
+    //static var allClasses = [Barbarian,Paladin,Druid,Mage] // Boucle for. Utliser i. Quand i=name, créer la classe ainsi sélectionnée
     static var heroNamesUsed = [String]()
     static var Classes = [Barbarian.self,Druid.self,Paladin.self,Mage.self]
     
@@ -64,6 +64,7 @@ class Character {
             print("\(self.name) soigne \(receiver.name)",
                   "\n\(receiver.name) récupère \(-self.damage).")
         }
+        receiver.HPInGame -= self.damage
     }
     
     func compare(compared:Character)->Character {

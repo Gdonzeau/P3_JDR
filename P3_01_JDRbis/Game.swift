@@ -18,7 +18,7 @@ class Game {
         createPlayer(countStart: 0)
         // Puis on crée autant de héros que nécessaire
         for i in 0 ..< numberOfPlayers{
-            Players[i].creationHero(countStart: 0,creator:Players[i].name, job: "")
+            Players[i].creationHero(countStart: 0,creator:Players[i].name)
         }
         // On décide qui commence
         throwCoin()

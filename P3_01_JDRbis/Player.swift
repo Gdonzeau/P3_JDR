@@ -22,72 +22,47 @@ class Player {
         Player.playerNamesUsed += [name]
     }
     
-    func creationHero(countStart:Int,creator:String,job:String) {
-        var career = job
+    func creationHero(countStart:Int,creator:String) {
+        var career = ""
+        var heroName = ""
+        var heroWeapon = Weapon()
         for i in countStart ..< Player.numberOfHeroes {
             
             while career == "" { // Tant que la réponse n'est pas compréhensible, on redemande
                 career = choiceClassnumber(number: i, creator: creator)
             }
+            
+            while heroName == "" {
+                heroName = giveNameHero(number: i,creator:creator)
+            }
+            
+            while heroWeapon.name == "un petit bâton" {
+                heroWeapon = choiceWeapon(career: career)
+            }
+            
+        //    createHero(Charac: <#T##Character#>, name: <#T##String#>, weapon: <#T##Weapon#>)
+            
             switch career {
             case "1":
-                //heroes.append(Character.allClasses[0])
-                
-                heroes.append(Barbarian.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon(career:career)))
-                
-                while heroes[i].name == "" {
-                    heroes[i].name = giveNameHero(number: i,creator:creator)
-                }
-                
-                while heroes[i].weapon.name == "un petit bâton" {
-                    print("Commande incorrecte")
-                    heroes[i].weapon = choiceWeapon(career: career)
-                }
+                heroes.append(Barbarian.init(name: heroName, weapon: heroWeapon))
                 
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
                 
             case "2":
-                heroes.append(Paladin.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon(career: career)))
-                
-                while heroes[i].name == "" {
-                    heroes[i].name = giveNameHero(number: i,creator:creator)
-                }
-                
-                while heroes[i].weapon.name == "un petit bâton" {
-                    print("Commande incorrecte")
-                    heroes[i].weapon = choiceWeapon(career: career)
-                }
+                heroes.append(Paladin.init(name: heroName, weapon: heroWeapon))
                 
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
                 
             case "3":
-                heroes.append(Druid.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon(career: career)))
-                
-                while heroes[i].name == "" {
-                    heroes[i].name = giveNameHero(number: i,creator:creator)
-                }
-                
-                while heroes[i].weapon.name == "un petit bâton" {
-                    print("Commande incorrecte")
-                    heroes[i].weapon = choiceWeapon(career: career)
-                }
+                heroes.append(Druid.init(name: heroName, weapon: heroWeapon))
                 
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
                 
             case "4":
-                heroes.append(Mage.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon(career: career)))
-                
-                while heroes[i].name == "" {
-                    heroes[i].name = giveNameHero(number: i,creator:creator)
-                }
-                
-                while heroes[i].weapon.name == "un petit bâton" {
-                    print("Commande incorrecte")
-                    heroes[i].weapon = choiceWeapon(career: career)
-                }
+                heroes.append(Mage.init(name: heroName, weapon: heroWeapon))
                 
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
@@ -95,27 +70,21 @@ class Player {
             default:
                 heroes.append(Character.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon(career: career)))
                 
-                while heroes[i].name == "" {
-                    heroes[i].name = giveNameHero(number: i,creator:creator)
-                }
-                
-                while heroes[i].weapon.name == "un petit bâton" {
-                    print("Commande incorrecte")
-                    heroes[i].weapon = choiceWeapon(career: career)
-                }
-                
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
                 
             }
-            
-            //let test = Int(career)! // On force le déballage de l'optionnel, mais on est sûr qu'il s'agit de 1, 2, 3 ou 4.
-            //print(test)
             career = ""
+            heroName = ""
+            heroWeapon = Weapon()
             
         }
     }
-    
+    /*
+    func createHero(Charac:Character,name:String,weapon:Weapon) {
+        heroes.append(type(of: Charac).init(name: name, weapon: weapon))
+    }
+    */
     func choiceClassnumber(number:Int,creator:String)->String {
         var retour:String = ""
         print("\(creator), quelle classe donnez-vous à votre héros numéro \(number+1) ?",
@@ -228,6 +197,31 @@ class Player {
             }
         }
         return nameDontExist
+    }
+    func playing() {
+        var whoActs = ""
+        while whoActs == "" {
+            whoActs = self.heroChoiceforAction()
+            print("Je ne comprends pas.")
+        }
+    }
+    func showHeros() {
+        for i in 0 ..< Player.numberOfHeroes {
+            print("[\(i+1)]. \(self.heroes[i].name)")
+        }
+    }
+    
+    func heroChoiceforAction()->String {
+        var retour:String
+        print("Qui choisissez-vous ?")
+        self.showHeros()
+        if let choice = readLine() {
+            retour = choice
+        }
+        else {
+            retour = ""
+        }
+        return retour
     }
     
     
