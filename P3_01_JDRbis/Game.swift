@@ -9,8 +9,9 @@ import Foundation
 
 class Game {
     
-    var Players = [Player]()
-    
+    var players = [Player]()
+    var attacker = Player(name: "")
+    var defender = Player(name: "")
     var numberOfPlayers = 2 // Combien de joueurs dans une partie
     
     func startGame() { // Déroulement de la parti
@@ -18,23 +19,38 @@ class Game {
         createPlayer(countStart: 0)
         // Puis on crée autant de héros que nécessaire
         for i in 0 ..< numberOfPlayers{
-            Players[i].creationHero(countStart: 0,creator:Players[i].name)
+            players[i].creationHero(countStart: 0,creator:players[i].name)
         }
+        // On présente les différents héros
+        self.presentEveryBody()
         // On décide qui commence
         throwCoin()
+        
+        while players[0].stillPlaying() > 0 && players[1].stillPlaying() > 0 {
+        whoseTurnIsIt()
+        attacker.playTurn()
+            attacker.findingSurvivals()
+        changeGo()
+        
+            /*
+            attacker.heroActivated = attacker.choiceHeros()
+            attacker.choiceHeros().actionOn(receiver: self.attacker.choiceTarget(heal: attacker.choiceHeros().weapon.Heals))
+            */
+        }
+        endGame()
     }
     
     func createPlayer(countStart:Int) { // On crée un joueur pour la partie
         for i in countStart ..< numberOfPlayers {
-            Players.append(Player.init(name: giveNamePlayer(number: i)))
-            if Players[i].name == "" {
+            players.append(Player.init(name: giveNamePlayer(number: i)))
+            if players[i].name == "" {
                 
-                Players.remove(at: i)
+                players.remove(at: i)
                 createPlayer(countStart: i)
                 break
             }
             else {
-                print("Bonjour \(Players[i].name)")
+                print("Bonjour \(players[i].name)")
             }
         }
     }
@@ -67,18 +83,39 @@ class Game {
     
     func presentEveryBody() {
         for i in 0 ..< numberOfPlayers {
-            print("\nVoici \(Players[i].name).",
+            print("\nVoici \(players[i].name).",
                   "\nIl possède \(Player.numberOfHeroes) personnages :")
             for j in 0 ..< Player.numberOfHeroes {
-                print("\n- \(Players[i].heroes[j].classe) qui nous a déclaré :")
-                Players[i].heroes[j].presentHimSelf()
+                print("\n- \(players[i].heroes[j].classe) qui nous a déclaré :")
+                players[i].heroes[j].presentHimSelf()
             }
         }
     }
     
     func throwCoin() {
-        let pièce = Int(arc4random_uniform(UInt32(2))) // On lance une pièce pour savoir qui commence
-        print("\(Players[pièce].name) commence.")
-        Players[pièce].myGo = true
+        let coin = Int(arc4random_uniform(UInt32(numberOfPlayers))) // On lance une pièce pour savoir qui commence
+        print("\(players[coin].name) commence.")
+        players[coin].myGo = true
+    }
+    
+    func whoseTurnIsIt() {
+        for player in players {
+            if player.myGo {
+                attacker = player
+            }
+            else {
+                defender = player
+            }
+        }
+        print("C'est le tour de \(attacker.name).")
+    }
+    func changeGo() {
+        players[0].myGo = !players[0].myGo
+        players[1].myGo = !players[1].myGo
+        
+    }
+    
+    func endGame() {
+        print("Partie terminée")
     }
 }

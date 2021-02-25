@@ -20,7 +20,7 @@ class Character {
         self.weapon = weapon
     }
     var HPInGame = 10
-    var weapon:Weapon // Si on demande l'arme à la création du perso
+    var weapon:Weapon
     
     var damage:Int {
         get {
@@ -65,6 +65,13 @@ class Character {
                   "\n\(receiver.name) récupère \(-self.damage).")
         }
         receiver.HPInGame -= self.damage
+        if receiver.HPInGame < 0 {
+            receiver.HPInGame = 0
+            print("\(receiver.name) est mort.")
+        }
+        if receiver.HPInGame > receiver.HPClass {
+            receiver.HPInGame = receiver.HPClass
+        }
     }
     
     func compare(compared:Character)->Character {

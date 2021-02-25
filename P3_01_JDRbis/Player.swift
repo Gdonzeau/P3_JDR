@@ -15,6 +15,7 @@ class Player {
     
     var heroes = [Character]()
     var heroesAlive = [Character]()
+    //var heroActivated = Character(name: "", weapon: Weapon())
     
     var name:String
     
@@ -22,6 +23,8 @@ class Player {
         self.name = name
         Player.playerNamesUsed += [name]
     }
+    
+    // MARK: CREATION
     
     func creationHero(countStart:Int,creator:String) {
         var career = ""
@@ -41,40 +44,25 @@ class Player {
                 heroWeapon = choiceWeapon(career: career)
             }
             
-        //    createHero(Charac: <#T##Character#>, name: <#T##String#>, weapon: <#T##Weapon#>)
-        //    createHero(type(of: Character(name: name, weapon: Weapon)))
+            //    createHero(Charac: <#T##Character#>, name: <#T##String#>, weapon: <#T##Weapon#>)
+            //    createHero(type(of: Character(name: name, weapon: Weapon)))
             switch career {
             case "1":
                 heroes.append(Barbarian.init(name: heroName, weapon: heroWeapon))
-                /*
-                print("Bonjour \(heroes[i].name)")
-                heroes[i].HPInGame = heroes[i].HPClass
-                */
+                
             case "2":
                 heroes.append(Paladin.init(name: heroName, weapon: heroWeapon))
-                /*
-                print("Bonjour \(heroes[i].name)")
-                heroes[i].HPInGame = heroes[i].HPClass
-                */
+                
             case "3":
                 heroes.append(Druid.init(name: heroName, weapon: heroWeapon))
-                /*
-                print("Bonjour \(heroes[i].name)")
-                heroes[i].HPInGame = heroes[i].HPClass
-                */
+                
             case "4":
                 heroes.append(Mage.init(name: heroName, weapon: heroWeapon))
-                /*
-                print("Bonjour \(heroes[i].name)")
-                heroes[i].HPInGame = heroes[i].HPClass
-                */
+                
             default:
                 heroes.append(Character.init(name: heroName, weapon: heroWeapon))
-                /*
-                print("Bonjour \(heroes[i].name)")
-                heroes[i].HPInGame = heroes[i].HPClass
-                */
             }
+            
             print("Bonjour \(heroes[i].name)")
             heroes[i].HPInGame = heroes[i].HPClass
             heroesAlive.append(heroes[i])
@@ -84,10 +72,12 @@ class Player {
         }
     }
     /*
-    func createHero(Carac : Character.init(name:String,weapon:Weapon)) {
-        heroes.append(Carac)
-    }
-    */
+     func createHero(Carac : Character.init(name:String,weapon:Weapon)) {
+     heroes.append(Carac)
+     }
+     */
+    //MARK: Choice class
+    
     func choiceClassnumber(number:Int,creator:String)->String {
         var retour:String = ""
         print("\(creator), quelle classe donnez-vous à votre héros numéro \(number+1) ?",
@@ -106,6 +96,8 @@ class Player {
         }
         return retour
     }
+    
+    //MARK: Choice weapon
     
     func choiceWeapon(career:String) -> Weapon {
         var retour = Weapon()
@@ -152,6 +144,8 @@ class Player {
         return retour
     }
     
+    //MARK: What kind of weapon for who ?
+    
     func defineWeapons(name:String) ->Weapon {
         var retour = Weapon()
         switch name {
@@ -175,6 +169,8 @@ class Player {
         return retour
     }
     
+    //MARK: Giving name
+    
     func giveNameHero(number:Int,creator:String)->String { // On lui donne un nom
         var retour:String = ""
         print("\(creator), comment appelez-vous votre héros numéro \(number+1) ?")
@@ -192,6 +188,8 @@ class Player {
         return retour
     }
     
+    //MARK: Checking nam
+    
     func checkNameHero(nameToCheck:String)->Bool {
         var nameDontExist = true
         for name in Character.heroNamesUsed {
@@ -202,46 +200,159 @@ class Player {
         return nameDontExist
     }
     
-    func turn() {
-        //var heroweapon = Weapon()
-        var heroPlaying = Character(name: "", weapon: Weapon())
-        print("\(self.name), à vous de jouer.")
+    //MARK: END CREATION
+    
+    
+    
+    //MARK: PLAY
+    
+    func stillPlaying()->Int { // Checking total heroes' HP left
+        var retour = 0
+        for i in 0 ..< Player.numberOfHeroes {
+            retour += self.heroes[i].HPInGame
+        }
+        print("Les héros de \(self.name) ont \(retour) PV restants.")
+        return retour
+    }
+    /*
+     func whoseTurnIsIt() {
+     for
+     //var heroweapon = Weapon()
+     var heroPlaying = Character(name: "", weapon: Weapon())
+     print("\(self.name), à vous de jouer.")
+     
+     while heroPlaying.name == "" {
+     heroPlaying = heroChoiceforAction()
+     }
+     }
+     */
+    /*
+     func playing() {
+     var whoActs = ""
+     while whoActs == "" {
+     whoActs = self.heroChoiceforAction().name
+     print("Je ne comprends pas.")
+     }
+     }
+     */
+    func playTurn() {
+        var heroActivated = Character(name: "", weapon: Weapon())
+        var target = Character(name: "", weapon: Weapon())
         
-        while heroPlaying.name == "" {
-            heroPlaying = heroChoiceforAction()
+        while heroActivated.name == "" {
+            heroActivated = choiceHeros()
         }
-    }
-    func playing() {
-        var whoActs = ""
-        while whoActs == "" {
-            whoActs = self.heroChoiceforAction().name
-            print("Je ne comprends pas.")
+        
+        while target.name == "" {
+            target = choiceTarget(heal: heroActivated.weapon.Heals)
         }
+        
+        heroActivated.actionOn(receiver: target)
+        
+        heroActivated = Character(name: "", weapon: Weapon())
+        target = Character(name: "", weapon: Weapon())
     }
-    func showHeros() {// Affiche le nom des persos du joueurs
-        var retour:Int?
+    
+    func choiceHeros()-> Character {// Affiche le nom des persos du joueurs
+        var retour = Character(name: "", weapon: Weapon())
+        var possibilities = [Int]()
+        for i in 0..<self.heroesAlive.count {
+            possibilities += [i]
+        }
+        print("Qui choisissez-vous pour ce tour ?")
         for i in 0 ..< self.heroesAlive.count {
             print("[\(i+1)]. \(self.heroesAlive[i].name)")
         }
         if let answer = readLine() {
-            print("Youpi")
-          //  if answer ==
-        }
-    }
-    
-    func heroChoiceforAction()->Character {
-        var retour = Character(name: "", weapon: Weapon())
-        print("Qui choisissez-vous ?")
-        self.showHeros()
-        if let choice = readLine() {
-            print("Chouette")
-           // retour = choice
-        }
-        else {
-           // retour =
+            var ok = false
+            for test in possibilities {
+                if test+1 == Int(answer) {
+                    retour = self.heroesAlive[test]
+                    print("Très bien")
+                    ok = true
+                    break
+                }
+            }
+            if ok == false {
+                print("Je n'ai pas compris")
+            }
         }
         return retour
     }
+    // FAIRE COMME LA CREATION DE HEROS AVEC 3 PROPRIETES ET 3 WHILE
+    func choiceTarget(heal:Bool)-> Character {
+        var retour = Character(name: "", weapon: Weapon())
+        var possibilities = [Int]()
+        // On vérifie si l'attaquant soigne ou attaque
+        if heal {
+            for i in 0..<self.heroesAlive.count {
+                possibilities += [i]
+            }
+            print("Qui choisissez-vous de soigner pour ce tour ?")
+            for i in 0 ..< self.heroesAlive.count {
+                print("[\(i+1)]. \(self.heroesAlive[i].name)")
+            }
+            if let answer = readLine() {
+                var ok = false
+                for test in possibilities {
+                    if test+1 == Int(answer) {
+                        retour = self.heroesAlive[test]
+                        print("Entendu")
+                        ok = true
+                        break
+                    }
+                }
+                if ok == false {
+                    print("Je n'ai pas compris")
+                }
+            }
+        }
+        else {
+            for i in 0..<game.defender.heroesAlive.count {
+                possibilities += [i]
+            }
+            print("Qui choisissez-vous d'attaquer pour ce tour ?")
+            for i in 0 ..< game.defender.heroesAlive.count {
+                print("[\(i+1)]. \(game.defender.heroesAlive[i].name)")
+            }
+            if let answer = readLine() {
+                var ok = false
+                for test in possibilities {
+                    if test+1 == Int(answer) {
+                        retour = game.defender.heroesAlive[test]
+                        print("Parfait")
+                        ok = true
+                        break
+                    }
+                }
+                if ok == false {
+                    print("Je n'ai pas compris")
+                }
+            }
+        }
+        //retour = Character(name: "", weapon: Weapon())
+        //possibilities = [Int]()
+        return retour
+    }
+    
+    func findingSurvivals() { // Checking who is still alive. Updating array heroesAlive
+        game.defender.heroesAlive = [Character]() // On vide le tableau et on supprime les cases
+        for i in 0 ..< Player.numberOfHeroes { // Et on le refait
+            if game.defender.heroes[i].HPInGame > 0 {
+                game.defender.heroesAlive.append(game.defender.heroes[i])
+            }
+        }
+        
+    }
+    /*
+     func heroChoiceforAction()->Character {
+     var retour = Character(name: "", weapon: Weapon())
+     while retour.name == "" {
+     retour = self.showHeros()
+     }
+     return retour
+     }
+     */
     
     
 }
