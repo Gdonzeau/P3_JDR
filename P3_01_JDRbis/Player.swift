@@ -11,11 +11,10 @@ class Player {
     static var playerNamesUsed = [String]()
     static var numberOfHeroes:Int = 3
     
-    var myGo = false // À qui est-ce le tour de jouer
+    var myGo = false // À qui est-ce le tour de jouer ?
     
     var heroes = [Character]()
     var heroesAlive = [Character]()
-    //var heroActivated = Character(name: "", weapon: Weapon())
     
     var name:String
     
@@ -188,7 +187,7 @@ class Player {
         return retour
     }
     
-    //MARK: Checking nam
+    //MARK: Checking name
     
     func checkNameHero(nameToCheck:String)->Bool {
         var nameDontExist = true
@@ -214,27 +213,7 @@ class Player {
         print("Les héros de \(self.name) ont \(retour) PV restants.")
         return retour
     }
-    /*
-     func whoseTurnIsIt() {
-     for
-     //var heroweapon = Weapon()
-     var heroPlaying = Character(name: "", weapon: Weapon())
-     print("\(self.name), à vous de jouer.")
-     
-     while heroPlaying.name == "" {
-     heroPlaying = heroChoiceforAction()
-     }
-     }
-     */
-    /*
-     func playing() {
-     var whoActs = ""
-     while whoActs == "" {
-     whoActs = self.heroChoiceforAction().name
-     print("Je ne comprends pas.")
-     }
-     }
-     */
+    
     func playTurn() {
         var heroActivated = Character(name: "", weapon: Weapon())
         var target = Character(name: "", weapon: Weapon())
@@ -242,6 +221,8 @@ class Player {
         while heroActivated.name == "" {
             heroActivated = choiceHeros()
         }
+        
+        magicChest(playingHero: heroActivated)
         
         while target.name == "" {
             target = choiceTarget(heal: heroActivated.weapon.Heals)
@@ -279,7 +260,7 @@ class Player {
         }
         return retour
     }
-    // FAIRE COMME LA CREATION DE HEROS AVEC 3 PROPRIETES ET 3 WHILE
+
     func choiceTarget(heal:Bool)-> Character {
         var retour = Character(name: "", weapon: Weapon())
         var possibilities = [Int]()
@@ -330,8 +311,6 @@ class Player {
                 }
             }
         }
-        //retour = Character(name: "", weapon: Weapon())
-        //possibilities = [Int]()
         return retour
     }
     
@@ -344,15 +323,26 @@ class Player {
         }
         
     }
-    /*
-     func heroChoiceforAction()->Character {
-     var retour = Character(name: "", weapon: Weapon())
-     while retour.name == "" {
-     retour = self.showHeros()
-     }
-     return retour
-     }
-     */
     
-    
+    func magicChest(playingHero:Character) {
+        var joker = Int()
+        if Int(arc4random_uniform(UInt32(100)))+1 <= game.probabilityOfChest { // On lance un D100 pour savoir si un coffre apparaît
+            print("Un coffre apparaît devant \(playingHero.name)")
+            joker = Int(arc4random_uniform(UInt32(Weapon.allWeapons.count)))
+            print("Le coffre contient \(Weapon.allWeapons[joker].name)")
+            print("Souhaitez-vous échanger \(playingHero.weapon.name) contre \(Weapon.allWeapons[joker].name)")
+            print("1. Oui")
+            print("2. Non")
+            
+            if let choice = readLine() {
+                if Int(choice) == 1 {
+                    playingHero.weapon = Weapon.allWeapons[joker]
+                }
+                else {
+                    // On pourrait aussi répéter en cas de réponse ni 1 ni 2. Mais si le joueur n'arrive pas à appuyer sur la bonne touche, c'est peut-être imprudent de lui laisser une arme. ;)
+                    print("On ne change pas")
+                }
+            }
+        }
+    }
 }

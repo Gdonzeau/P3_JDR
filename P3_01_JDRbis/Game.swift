@@ -13,8 +13,10 @@ class Game {
     var attacker = Player(name: "")
     var defender = Player(name: "")
     var numberOfPlayers = 2 // Combien de joueurs dans une partie
+    var numberOfTurns = 0
+    let probabilityOfChest = 90 // Pourcentage de chance d'apparition d'un coffre
     
-    func startGame() { // Déroulement de la parti
+    func startGame() { // Déroulement de la partie
         // On crée autant de joueurs que nécessaire
         createPlayer(countStart: 0)
         // Puis on crée autant de héros que nécessaire
@@ -27,15 +29,11 @@ class Game {
         throwCoin()
         
         while players[0].stillPlaying() > 0 && players[1].stillPlaying() > 0 {
-        whoseTurnIsIt()
-        attacker.playTurn()
+            whoseTurnIsIt()
+            if checkForDraw() { break } // À retirer si on souhaite se baser sur la chance des coffres
+            attacker.playTurn()
             attacker.findingSurvivals()
-        changeGo()
-        
-            /*
-            attacker.heroActivated = attacker.choiceHeros()
-            attacker.choiceHeros().actionOn(receiver: self.attacker.choiceTarget(heal: attacker.choiceHeros().weapon.Heals))
-            */
+            changeGo()
         }
         endGame()
     }
@@ -99,6 +97,7 @@ class Game {
     }
     
     func whoseTurnIsIt() {
+        self.numberOfTurns += 1
         for player in players {
             if player.myGo {
                 attacker = player
@@ -112,10 +111,30 @@ class Game {
     func changeGo() {
         players[0].myGo = !players[0].myGo
         players[1].myGo = !players[1].myGo
-        
     }
     
-    func endGame() {
-        print("Partie terminée")
+    func checkForDraw()->Bool { // If there are only healers left, nobody can wins. It is a draw
+        var onlyHealers = true
+        for i in 0 ..< numberOfPlayers {
+            for j in 0 ..< Player.numberOfHeroes {
+                if players[i].heroes[j].weapon.Heals == false {
+                    onlyHealers = false
+                    break
+                }
+            }
+        }
+        if onlyHealers {print("Il n'y a plus aucun combattant capable de blesser. Égalité.")}
+        return onlyHealers
+    }
+    
+    func endGame() { //Mr. Stark ?
+        print("Partie terminée.",
+              "\nElle a duré : \(numberOfTurns) tours.")
+        if players[0].stillPlaying() == 0 {
+            print("\(players[1].name) a gagné.")
+        }
+        if players[1].stillPlaying() == 0 {
+            print("\(players[0].name) a gagné.")
+        }
     }
 }
