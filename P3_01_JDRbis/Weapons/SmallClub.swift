@@ -11,6 +11,8 @@ class SmallClub:Weapon {
     override var name: String { "un petit bâton" }
     override var damage: Int { 10 }
     override var number:Int { 7 }
+    override var Heals:Bool { false }
+    
     override var barbarianAuthorized:Bool { true }
     override var druidAuthorized:Bool { true }
     override var paladinAuthorized:Bool { true }

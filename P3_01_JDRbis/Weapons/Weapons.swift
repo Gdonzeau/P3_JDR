@@ -20,6 +20,11 @@ class Weapon {
         return 10
         }
     }
+    var Heals:Bool {
+        get {
+        return false
+        }
+    }
     var number:Int {
         get {
             return 100

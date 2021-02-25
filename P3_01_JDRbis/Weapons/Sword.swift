@@ -11,6 +11,8 @@ class Sword:Weapon {
     override var name: String { "une épée" }
     override var damage: Int { 30 }
     override var number:Int { 1 }
+    override var Heals:Bool { true }
+    
     override var barbarianAuthorized:Bool { true }
     override var druidAuthorized:Bool { false }
     override var paladinAuthorized:Bool { true }

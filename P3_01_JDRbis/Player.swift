@@ -14,6 +14,7 @@ class Player {
     var myGo = false // À qui est-ce le tour de jouer
     
     var heroes = [Character]()
+    var heroesAlive = [Character]()
     
     var name:String
     
@@ -41,48 +42,50 @@ class Player {
             }
             
         //    createHero(Charac: <#T##Character#>, name: <#T##String#>, weapon: <#T##Weapon#>)
-            
+        //    createHero(type(of: Character(name: name, weapon: Weapon)))
             switch career {
             case "1":
                 heroes.append(Barbarian.init(name: heroName, weapon: heroWeapon))
-                
+                /*
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
-                
+                */
             case "2":
                 heroes.append(Paladin.init(name: heroName, weapon: heroWeapon))
-                
+                /*
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
-                
+                */
             case "3":
                 heroes.append(Druid.init(name: heroName, weapon: heroWeapon))
-                
+                /*
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
-                
+                */
             case "4":
                 heroes.append(Mage.init(name: heroName, weapon: heroWeapon))
-                
+                /*
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
-                
+                */
             default:
-                heroes.append(Character.init(name: giveNameHero(number: i,creator:creator), weapon: choiceWeapon(career: career)))
-                
+                heroes.append(Character.init(name: heroName, weapon: heroWeapon))
+                /*
                 print("Bonjour \(heroes[i].name)")
                 heroes[i].HPInGame = heroes[i].HPClass
-                
+                */
             }
+            print("Bonjour \(heroes[i].name)")
+            heroes[i].HPInGame = heroes[i].HPClass
+            heroesAlive.append(heroes[i])
             career = ""
             heroName = ""
             heroWeapon = Weapon()
-            
         }
     }
     /*
-    func createHero(Charac:Character,name:String,weapon:Weapon) {
-        heroes.append(type(of: Charac).init(name: name, weapon: weapon))
+    func createHero(Carac : Character.init(name:String,weapon:Weapon)) {
+        heroes.append(Carac)
     }
     */
     func choiceClassnumber(number:Int,creator:String)->String {
@@ -198,28 +201,44 @@ class Player {
         }
         return nameDontExist
     }
+    
+    func turn() {
+        //var heroweapon = Weapon()
+        var heroPlaying = Character(name: "", weapon: Weapon())
+        print("\(self.name), à vous de jouer.")
+        
+        while heroPlaying.name == "" {
+            heroPlaying = heroChoiceforAction()
+        }
+    }
     func playing() {
         var whoActs = ""
         while whoActs == "" {
-            whoActs = self.heroChoiceforAction()
+            whoActs = self.heroChoiceforAction().name
             print("Je ne comprends pas.")
         }
     }
-    func showHeros() {
-        for i in 0 ..< Player.numberOfHeroes {
-            print("[\(i+1)]. \(self.heroes[i].name)")
+    func showHeros() {// Affiche le nom des persos du joueurs
+        var retour:Int?
+        for i in 0 ..< self.heroesAlive.count {
+            print("[\(i+1)]. \(self.heroesAlive[i].name)")
+        }
+        if let answer = readLine() {
+            print("Youpi")
+          //  if answer ==
         }
     }
     
-    func heroChoiceforAction()->String {
-        var retour:String
+    func heroChoiceforAction()->Character {
+        var retour = Character(name: "", weapon: Weapon())
         print("Qui choisissez-vous ?")
         self.showHeros()
         if let choice = readLine() {
-            retour = choice
+            print("Chouette")
+           // retour = choice
         }
         else {
-            retour = ""
+           // retour =
         }
         return retour
     }
