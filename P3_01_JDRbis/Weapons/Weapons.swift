@@ -8,7 +8,7 @@
 import Foundation
 
 class Weapon {
-    static var allWeapons = [Axe(),BigHealingSpell(),Dagger(),Flail(),Hammer(),HealingSpell(),Sword()]
+    static var allWeapons = [Axe(),BigHealingSpell(),Dagger(),Flail(),Hammer(),HealingSpell(),Sword(),FireBall()]
     //static var possibleEquipment = ["une épée","un sort de soin","un poignard","une hache","une masse d'arme"]
     var name:String {
         get {

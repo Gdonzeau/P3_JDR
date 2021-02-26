@@ -24,6 +24,7 @@
 		0451BF0125E5CD5500FAA9F0 /* Paladin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BF0025E5CD5500FAA9F0 /* Paladin.swift */; };
 		0451BF0425E5CD7300FAA9F0 /* Mage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BF0325E5CD7300FAA9F0 /* Mage.swift */; };
 		0451BF0A25E6C02A00FAA9F0 /* SmallClub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BF0925E6C02A00FAA9F0 /* SmallClub.swift */; };
+		0451BF0E25E93C3900FAA9F0 /* FireBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451BF0D25E93C3800FAA9F0 /* FireBall.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +58,7 @@
 		0451BF0025E5CD5500FAA9F0 /* Paladin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Paladin.swift; sourceTree = "<group>"; };
 		0451BF0325E5CD7300FAA9F0 /* Mage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mage.swift; sourceTree = "<group>"; };
 		0451BF0925E6C02A00FAA9F0 /* SmallClub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallClub.swift; sourceTree = "<group>"; };
+		0451BF0D25E93C3800FAA9F0 /* FireBall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBall.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				0451BEDD25E5AE7B00FAA9F0 /* Weapons.swift */,
 				0451BEDE25E5AE7B00FAA9F0 /* Axe.swift */,
+				0451BF0D25E93C3800FAA9F0 /* FireBall.swift */,
 				0451BEE025E5AE7B00FAA9F0 /* Big Healing Spell.swift */,
 				0451BEE325E5AE7B00FAA9F0 /* Dagger.swift */,
 				0451BEE125E5AE7B00FAA9F0 /* Flail.swift */,
@@ -191,6 +194,7 @@
 				0451BEEB25E5AE7B00FAA9F0 /* Dagger.swift in Sources */,
 				0451BEF625E5B26800FAA9F0 /* Player.swift in Sources */,
 				0451BF0125E5CD5500FAA9F0 /* Paladin.swift in Sources */,
+				0451BF0E25E93C3900FAA9F0 /* FireBall.swift in Sources */,
 				0451BEE825E5AE7B00FAA9F0 /* Big Healing Spell.swift in Sources */,
 				0451BED625E5ADB700FAA9F0 /* main.swift in Sources */,
 				0451BEFB25E5CC7900FAA9F0 /* Barbarian.swift in Sources */,

@@ -147,23 +147,33 @@ class Player {
     
     func defineWeapons(name:String) ->Weapon {
         var retour = Weapon()
-        switch name {
-        case "une hache":
-            retour = Axe()
-        case "un sort de soin majeur":
-            retour = BigHealingSpell()
-        case "une dague":
-            retour = Dagger()
-        case "un fléau":
-            retour = Flail()
-        case "un marteau":
-            retour = Hammer()
-        case "un sort de soin":
-            retour = HealingSpell()
-        case "une épée":
-            retour = Sword()
-        default :
-            retour = SmallClub()
+        //Amélioration possible :
+        for i in 0 ..< Weapon.allWeapons.count {
+            if name == Weapon.allWeapons[i].name {
+                retour = Weapon.allWeapons[i]
+            }
+            /*
+             switch name {
+             case "une hache":
+             retour = Axe()
+             case "un sort de soin majeur":
+             retour = BigHealingSpell()
+             case "une dague":
+             retour = Dagger()
+             case "un fléau":
+             retour = Flail()
+             case "un marteau":
+             retour = Hammer()
+             case "un sort de soin":
+             retour = HealingSpell()
+             case "une épée":
+             retour = Sword()
+             case "une boule de feu":
+             retour = FireBall()
+             default :
+             retour = SmallClub()
+             }
+             */
         }
         return retour
     }
@@ -260,7 +270,7 @@ class Player {
         }
         return retour
     }
-
+    
     func choiceTarget(heal:Bool)-> Character {
         var retour = Character(name: "", weapon: Weapon())
         var possibilities = [Int]()

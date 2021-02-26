@@ -27,9 +27,19 @@ class Character {
             return weapon.damage
         }
     }
+    var symbol:String {
+        get {
+            return "😀"
+        }
+    }
     var HPClass:Int {
         get {
             return 20
+        }
+    }
+    var armor:Int {
+        get {
+            return 0
         }
     }
     var classe:String {
@@ -56,25 +66,32 @@ class Character {
     }
     
     func actionOn(receiver:Character) {
+        var realDamage = 0
         if self.damage > 0 {
+            realDamage = self.damage - receiver.armor
             print("\(self.name) attaque \(receiver.name)",
-                  "\net lui inflige \(self.damage) points de dégat.")
+                  "\net lui inflige \(realDamage) points de dégat.")
         }
         else {
+            realDamage = self.damage
             print("\(self.name) soigne \(receiver.name)",
                   "\n\(receiver.name) récupère \(-self.damage).")
         }
-        receiver.HPInGame -= self.damage
+        receiver.HPInGame -= realDamage
         if receiver.HPInGame < 0 {
             receiver.HPInGame = 0
+        }
+        
+        if receiver.HPInGame == 0 {
             print("\(receiver.name) est mort.")
         }
+        
         if receiver.HPInGame > receiver.HPClass {
             receiver.HPInGame = receiver.HPClass
         }
     }
     
-    func compare(compared:Character)->Character {
+    func compare(compared:Character)->Character { // Utiliser des tuples ?
         var retour:Character
         if self.damage > compared.damage {
             retour = self
