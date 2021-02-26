@@ -7,11 +7,11 @@
 
 import Foundation
 
-class FireBall:Weapon {
+class Fireball:Weapon {
     override var name: String { "une boule de feu" }
     override var damage: Int { 50 }
     override var number:Int { 8 }
-    override var Heals:Bool { false }
+    override var heals:Bool { false }
     
     override var barbarianAuthorized:Bool { false }
     override var druidAuthorized:Bool { false }

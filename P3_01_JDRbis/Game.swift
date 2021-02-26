@@ -15,9 +15,11 @@ class Game {
     var numberOfPlayers = 2 // Combien de joueurs dans une partie
     var numberOfTurns = 0
     let probabilityOfChest = 90 // Pourcentage de chance d'apparition d'un coffre
+    let chestIsGeneric = true //Can chest contain everything or just stuff adapted to hero opening it ?
     
     func startGame() { // Déroulement de la partie
         // On crée autant de joueurs que nécessaire
+        Weapon.initializingChests()
         createPlayer(countStart: 0)
         // Puis on crée autant de héros que nécessaire
         for i in 0 ..< numberOfPlayers{
@@ -28,7 +30,7 @@ class Game {
         // On décide qui commence
         throwCoin()
         
-        while players[0].stillPlaying() > 0 && players[1].stillPlaying() > 0 {
+        while players[0].stillAlive() > 0 && players[1].stillAlive() > 0 {
             whoseTurnIsIt()
             if checkForDraw() { break } // À retirer si on souhaite se baser sur la chance des coffres
             attacker.playTurn()
@@ -117,7 +119,7 @@ class Game {
         var onlyHealers = true
         for i in 0 ..< numberOfPlayers {
             for j in 0 ..< Player.numberOfHeroes {
-                if players[i].heroes[j].weapon.Heals == false {
+                if players[i].heroes[j].weapon.heals == false {
                     onlyHealers = false
                     break
                 }
@@ -130,10 +132,10 @@ class Game {
     func endGame() { //Mr. Stark ?
         print("Partie terminée.",
               "\nElle a duré : \(numberOfTurns) tours.")
-        if players[0].stillPlaying() == 0 {
+        if players[0].stillAlive() == 0 {
             print("\(players[1].name) a gagné.")
         }
-        if players[1].stillPlaying() == 0 {
+        if players[1].stillAlive() == 0 {
             print("\(players[0].name) a gagné.")
         }
     }

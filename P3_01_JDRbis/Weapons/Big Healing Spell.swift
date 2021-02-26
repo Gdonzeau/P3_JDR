@@ -11,7 +11,7 @@ class BigHealingSpell:Weapon {
     override var name: String { "un sort de soin majeur" }
     override var damage: Int { -50 }
     override var number:Int { 0 }
-    override var Heals:Bool { true }
+    override var heals:Bool { true }
     
     override var barbarianAuthorized:Bool { false }
     override var druidAuthorized:Bool { true }

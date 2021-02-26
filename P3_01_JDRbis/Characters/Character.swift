@@ -10,7 +10,7 @@ import Foundation
 class Character {
     //static var allClasses = [Barbarian,Paladin,Druid,Mage] // Boucle for. Utliser i. Quand i=name, créer la classe ainsi sélectionnée
     static var heroNamesUsed = [String]()
-    static var Classes = [Barbarian.self,Druid.self,Paladin.self,Mage.self]
+    static var allClasses = [Barbarian(name: "", weapon: Weapon()),Druid(name: "", weapon: Weapon()),Paladin(name: "", weapon: Weapon()),Mage(name: "", weapon: Weapon())]
     
     var name:String
     

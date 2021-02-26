@@ -32,7 +32,7 @@ class Player {
         for i in countStart ..< Player.numberOfHeroes {
             
             while career == "" { // Tant que la réponse n'est pas compréhensible, on redemande
-                career = choiceClassnumber(number: i, creator: creator)
+                career = choiceClass(number: i, creator: creator)
             }
             
             while heroName == "" {
@@ -77,7 +77,7 @@ class Player {
      */
     //MARK: Choice class
     
-    func choiceClassnumber(number:Int,creator:String)->String {
+    func choiceClass(number:Int,creator:String)->String {
         var retour:String = ""
         print("\(creator), quelle classe donnez-vous à votre héros numéro \(number+1) ?",
               "\n1. Barbare",
@@ -215,7 +215,7 @@ class Player {
     
     //MARK: PLAY
     
-    func stillPlaying()->Int { // Checking total heroes' HP left
+    func stillAlive()->Int { // Checking total heroes' HP left
         var retour = 0
         for i in 0 ..< Player.numberOfHeroes {
             retour += self.heroes[i].HPInGame
@@ -229,13 +229,13 @@ class Player {
         var target = Character(name: "", weapon: Weapon())
         
         while heroActivated.name == "" {
-            heroActivated = choiceHeros()
+            heroActivated = choiceHero()
         }
         
         magicChest(playingHero: heroActivated)
         
         while target.name == "" {
-            target = choiceTarget(heal: heroActivated.weapon.Heals)
+            target = choiceTarget(heal: heroActivated.weapon.heals)
         }
         
         heroActivated.actionOn(receiver: target)
@@ -244,7 +244,7 @@ class Player {
         target = Character(name: "", weapon: Weapon())
     }
     
-    func choiceHeros()-> Character {// Affiche le nom des persos du joueurs
+    func choiceHero()-> Character {// Affiche le nom des persos du joueurs
         var retour = Character(name: "", weapon: Weapon())
         var possibilities = [Int]()
         for i in 0..<self.heroesAlive.count {
@@ -331,13 +331,13 @@ class Player {
                 game.defender.heroesAlive.append(game.defender.heroes[i])
             }
         }
-        
     }
     
     func magicChest(playingHero:Character) {
         var joker = Int()
         if Int(arc4random_uniform(UInt32(100)))+1 <= game.probabilityOfChest { // On lance un D100 pour savoir si un coffre apparaît
             print("Un coffre apparaît devant \(playingHero.name)")
+            
             joker = Int(arc4random_uniform(UInt32(Weapon.allWeapons.count)))
             print("Le coffre contient \(Weapon.allWeapons[joker].name)")
             print("Souhaitez-vous échanger \(playingHero.weapon.name) contre \(Weapon.allWeapons[joker].name)")

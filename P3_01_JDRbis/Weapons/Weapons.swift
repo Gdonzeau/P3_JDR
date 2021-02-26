@@ -8,21 +8,25 @@
 import Foundation
 
 class Weapon {
-    static var allWeapons = [Axe(),BigHealingSpell(),Dagger(),Flail(),Hammer(),HealingSpell(),Sword(),FireBall()]
+    static var allWeapons = [Axe(),BigHealingSpell(),Dagger(),Flail(),Hammer(),HealingSpell(),Sword(),Fireball(),SmallClub()]
+    static var barbarianWeapons = [Weapon]()
+    static var paladinWeapons = [Weapon]()
+    static var druidWeapons = [Weapon]()
+    static var mageWeapons = [Weapon]()
     //static var possibleEquipment = ["une épée","un sort de soin","un poignard","une hache","une masse d'arme"]
     var name:String {
         get {
-        return "un petit bâton"
+            return "un petit bâton"
         }
     }
     var damage:Int {
         get {
-        return 10
+            return 10
         }
     }
-    var Heals:Bool {
+    var heals:Bool {
         get {
-        return false
+            return false
         }
     }
     var number:Int {
@@ -48,6 +52,22 @@ class Weapon {
     var mageAuthorized:Bool {
         get {
             return true
+        }
+    }
+    static func initializingChests() { // Initialisation automatique
+        for stuff in Weapon.allWeapons {
+            if stuff.barbarianAuthorized {
+                Weapon.barbarianWeapons += [stuff]
+            }
+            if stuff.paladinAuthorized {
+                Weapon.paladinWeapons += [stuff]
+            }
+            if stuff.druidAuthorized {
+                Weapon.druidWeapons += [stuff]
+            }
+            if stuff.mageAuthorized {
+                Weapon.mageWeapons += [stuff]
+            }
         }
     }
 }

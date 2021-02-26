@@ -11,7 +11,7 @@ class HealingSpell:Weapon {
     override var name: String { "un sort de soin" }
     override var damage: Int { -30 }
     override var number:Int { 6 }
-    override var Heals:Bool { true }
+    override var heals:Bool { true }
     
     override var barbarianAuthorized:Bool { false }
     override var druidAuthorized:Bool { true }

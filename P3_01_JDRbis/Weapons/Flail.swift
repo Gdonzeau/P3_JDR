@@ -11,7 +11,7 @@ class Flail:Weapon {
     override var name: String { "un fléau" }
     override var damage: Int { 45 }
     override var number:Int { 3 }
-    override var Heals:Bool { false }
+    override var heals:Bool { false }
     
     override var barbarianAuthorized:Bool { false }
     override var druidAuthorized:Bool { false }
