@@ -8,6 +8,7 @@
 import Foundation
 
 class Paladin: Character {
+    override var ref:Int { 2 }
     override var HPClass:Int { 80 }
     override var armor:Int { 10 }
     override var magicProtect:Int { 90 }

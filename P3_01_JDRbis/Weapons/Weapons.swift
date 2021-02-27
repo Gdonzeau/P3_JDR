@@ -14,7 +14,7 @@ class Weapon {
     static var druidWeapons = [Weapon]()
     static var mageWeapons = [Weapon]()
     static var allChests = [barbarianWeapons,druidWeapons,paladinWeapons,mageWeapons]
-    //static var possibleEquipment = ["une épée","un sort de soin","un poignard","une hache","une masse d'arme"]
+    
     var name:String {
         get {
             return "rien"

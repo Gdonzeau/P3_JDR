@@ -8,6 +8,7 @@
 import Foundation
 
 class Druid: Character {
+    override var ref:Int { 1 }
     override var HPClass:Int { 60 }
     override var armor:Int { 0 }
     override var magicProtect:Int { 60 }

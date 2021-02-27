@@ -12,6 +12,7 @@ class Player {
     static var numberOfHeroes:Int = 3
     
     var myGo = false // À qui est-ce le tour de jouer ?
+    var magicChestChoiceFree = false //When a magicChest appears, does the player can get everyequipment including for other classes ? For example can a Barbarian get (and use) a fireBall ?
     
     var heroes = [Character]()
     var heroesAlive = [Character]()
@@ -26,12 +27,12 @@ class Player {
     // MARK: CREATION
     
     func creationHero(countStart:Int,creator:String) {
-        var career = ""
+        var career = 0
         var heroName = ""
         var heroWeapon = Weapon()
         for i in countStart ..< Player.numberOfHeroes {
             
-            while career == "" { // Tant que la réponse n'est pas compréhensible, on redemande
+            while career == 0 { // Tant que la réponse n'est pas compréhensible, on redemande
                 career = choiceClass(number: i, creator: creator)
             }
             
@@ -45,27 +46,31 @@ class Player {
             
             //    createHero(Charac: <#T##Character#>, name: <#T##String#>, weapon: <#T##Weapon#>)
             //    createHero(type(of: Character(name: name, weapon: Weapon)))
+            
             switch career {
-            case "1":
+            case 1:
                 heroes.append(Barbarian.init(name: heroName, weapon: heroWeapon))
                 
-            case "2":
-                heroes.append(Paladin.init(name: heroName, weapon: heroWeapon))
-                
-            case "3":
+            case 2:
                 heroes.append(Druid.init(name: heroName, weapon: heroWeapon))
                 
-            case "4":
+            case 3:
+                heroes.append(Paladin.init(name: heroName, weapon: heroWeapon))
+                
+            case 4:
                 heroes.append(Mage.init(name: heroName, weapon: heroWeapon))
                 
             default:
                 heroes.append(Character.init(name: heroName, weapon: heroWeapon))
             }
+ 
+            //Character.allClassesCreator[career]
+            
             
             print("Bonjour \(heroes[i].name)")
             heroes[i].HPInGame = heroes[i].HPClass
             heroesAlive.append(heroes[i])
-            career = ""
+            career = 0
             heroName = ""
             heroWeapon = Weapon()
         }
@@ -77,23 +82,26 @@ class Player {
      */
     //MARK: Choice class
     
-    func choiceClass(number:Int,creator:String)->String {
-        var retour:String = ""
+    func choiceClass(number:Int,creator:String)->Int {
+        var response = 0
         print("\(creator), quelle classe donnez-vous à votre héros numéro \(number+1) ?",
               "\n1. Barbare",
-              "\n2. Paladin",
-              "\n3. Druide",
+              "\n2. Druide",
+              "\n3. Paladin",
               "\n4. Mage")
         
         if let answer = readLine() {
-            if answer == "1" || answer == "2" || answer == "3" || answer == "4" {
-                retour = answer
+            if Int(answer) == 1 || Int(answer) == 2 || Int(answer) == 3 || Int(answer) == 4 {
+                if let retour = Int(answer) {
+                    response = retour
+                }
+                
             }
             else {
                 print("Je n'ai pas compris, veuillez refaire votre choix.")
             }
         }
-        return retour
+        return response
     }
     
     //MARK: Choice weapon
@@ -103,53 +111,8 @@ class Player {
         var nameRetour = ""
         var choice = [Weapon]()
         //var number = Int(career)
-        choice = Weapon.allChests[career]
+        choice = Weapon.allChests[career-1]
         
-        /*
-        // On fait un tableau des armes existantes et autorisées en fonction de la classe du perso
-    //    for i in 0 ..< Weapon.allWeapons.count {
-            if career == "1" { // Armes autorisées pour le Barbare
-                 // This :
-                choice = Weapon.barbarianWeapons
-                // Or this one
-                /*
-                if Weapon.allWeapons[i].barbarianAuthorized {
-                    choice += [Weapon.allWeapons[i]]
-                }
- */
-            }
-            if career == "2" { // Armes autorisées pour le Paladin
-                // This :
-               choice = Weapon.paladinWeapons
-               // Or this one
-                /*
-                if Weapon.allWeapons[i].paladinAuthorized {
-                    choice += [Weapon.allWeapons[i]]
-                }
- */
-            }
-            if career == "3" { // Armes autorisées pour le Druide
-                // This :
-               choice = Weapon.druidWeapons
-               // Or this one
-                /*
-                if Weapon.allWeapons[i].druidAuthorized {
-                    choice += [Weapon.allWeapons[i]]
-                }
- */
-            }
-            if career == "4" { // Armes autorisées pour le Mage
-                // This :
-               choice = Weapon.mageWeapons
-               // Or this one
-                /*
-                if Weapon.allWeapons[i].mageAuthorized {
-                    choice += [Weapon.allWeapons[i]]
-                }
- */
-            }
-        */
-     //   }
         print("Vous pouvez choisir un équipement :")
         
         var possibilities = [Int]()
@@ -178,28 +141,6 @@ class Player {
             if name == Weapon.allWeapons[i].name {
                 retour = Weapon.allWeapons[i]
             }
-            /*
-             switch name {
-             case "une hache":
-             retour = Axe()
-             case "un sort de soin majeur":
-             retour = BigHealingSpell()
-             case "une dague":
-             retour = Dagger()
-             case "un fléau":
-             retour = Flail()
-             case "un marteau":
-             retour = Hammer()
-             case "un sort de soin":
-             retour = HealingSpell()
-             case "une épée":
-             retour = Sword()
-             case "une boule de feu":
-             retour = FireBall()
-             default :
-             retour = SmallClub()
-             }
-             */
         }
         return retour
     }
@@ -363,10 +304,18 @@ class Player {
         var joker = Int()
         if Int(arc4random_uniform(UInt32(100)))+1 <= game.probabilityOfChest { // On lance un D100 pour savoir si un coffre apparaît
             print("Un coffre apparaît devant \(playingHero.name)")
-            
+            if magicChestChoiceFree {
+            // Generic Chest
             joker = Int(arc4random_uniform(UInt32(Weapon.allWeapons.count)))
             print("Le coffre contient \(Weapon.allWeapons[joker].name)")
             print("Souhaitez-vous échanger \(playingHero.weapon.name) contre \(Weapon.allWeapons[joker].name)")
+        }
+        else {
+            // Personnal chest
+            joker = Int(arc4random_uniform(UInt32(Weapon.allChests[playingHero.ref].count)))
+            print("Le coffre contient \(Weapon.allChests[playingHero.ref][joker].name)")
+            print("Souhaitez-vous échanger \(playingHero.weapon.name) contre \(Weapon.allChests[playingHero.ref][joker].name)")
+        }
             print("1. Oui")
             print("2. Non")
             

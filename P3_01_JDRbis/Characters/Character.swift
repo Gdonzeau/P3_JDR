@@ -23,6 +23,12 @@ class Character {
     var HPInGame = 10
     var weapon:Weapon
     
+    var ref:Int { // Where in the arrays allClasses and allChests
+        get {
+            return -1
+        }
+    }
+    
     var damage:Int {
         get {
             return weapon.damage
