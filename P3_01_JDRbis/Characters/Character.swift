@@ -10,7 +10,8 @@ import Foundation
 class Character {
     //static var allClasses = [Barbarian,Paladin,Druid,Mage] // Boucle for. Utliser i. Quand i=name, créer la classe ainsi sélectionnée
     static var heroNamesUsed = [String]()
-    static var allClasses = [Barbarian.init(name: "", weapon: Weapon()),Druid.init(name: "", weapon: Weapon()),Paladin.init(name: "", weapon: Weapon()),Mage.init(name: "", weapon: Weapon())]
+    static var allClasses = [Barbarian(name: "", weapon: Weapon()),Druid(name: "", weapon: Weapon()),Paladin(name: "", weapon: Weapon()),Mage(name: "", weapon: Weapon())]
+    static var allClassesCreator = [Barbarian.init(name: "", weapon: Weapon()),Druid.init(name: "", weapon: Weapon()),Paladin.init(name: "", weapon: Weapon()),Mage.init(name: "", weapon: Weapon())]
     
     var name:String
     
@@ -69,7 +70,8 @@ class Character {
         var realDamage = 0
         if self.damage > 0 {
             if receiver.magicProtection() { // If the magic protection active
-                print("Protection magique !")
+                print("\(self.name) attaque \(receiver.name)",
+                "La protection magique de \(receiver.name) s'active ! L'attaque est arrêtée !")
             }
             else {
             realDamage = self.damage - receiver.armor

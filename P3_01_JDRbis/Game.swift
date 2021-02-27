@@ -20,6 +20,7 @@ class Game {
     func startGame() { // Déroulement de la partie
         // On crée autant de joueurs que nécessaire
         Weapon.initializingChests()
+        
         createPlayer(countStart: 0)
         // Puis on crée autant de héros que nécessaire
         for i in 0 ..< numberOfPlayers{

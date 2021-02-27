@@ -40,7 +40,7 @@ class Player {
             }
             
             while heroWeapon.name == "rien" {
-                heroWeapon = choiceWeapon(career: career)
+                heroWeapon = choiceWeapon(career: Int(career))
             }
             
             //    createHero(Charac: <#T##Character#>, name: <#T##String#>, weapon: <#T##Weapon#>)
@@ -98,11 +98,14 @@ class Player {
     
     //MARK: Choice weapon
     
-    func choiceWeapon(career:String) -> Weapon {
+    func choiceWeapon(career:Int) -> Weapon {
         var retour = Weapon()
         var nameRetour = ""
         var choice = [Weapon]()
+        //var number = Int(career)
+        choice = Weapon.allChests[career]
         
+        /*
         // On fait un tableau des armes existantes et autorisées en fonction de la classe du perso
     //    for i in 0 ..< Weapon.allWeapons.count {
             if career == "1" { // Armes autorisées pour le Barbare
@@ -145,6 +148,7 @@ class Player {
                 }
  */
             }
+        */
      //   }
         print("Vous pouvez choisir un équipement :")
         
