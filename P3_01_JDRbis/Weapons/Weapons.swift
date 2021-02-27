@@ -8,6 +8,7 @@
 import Foundation
 
 class Weapon {
+    // Chests which contains weapons
     static var allWeapons = [Axe(),BigHealingSpell(),Dagger(),Flail(),Hammer(),HealingSpell(),Sword(),Fireball(),SmallClub()]
     static var barbarianWeapons = [Weapon]()
     static var paladinWeapons = [Weapon]()
@@ -25,16 +26,17 @@ class Weapon {
             return 10
         }
     }
-    var heals:Bool {
+    var heals:Bool { //Does the equipment heal ?
         get {
             return false
         }
     }
-    var number:Int {
+    var number:Int { //Rank in the array
         get {
             return 100
         }
     }
+    // Who can use this equipment ?
     var barbarianAuthorized:Bool {
         get {
             return true
@@ -55,7 +57,7 @@ class Weapon {
             return true
         }
     }
-    static func initializingChests() { // Initialisation automatique
+    static func initializingChests() { // Each class has its own chest
         for stuff in Weapon.allWeapons {
             if stuff.barbarianAuthorized {
                 Weapon.barbarianWeapons += [stuff]
@@ -71,6 +73,7 @@ class Weapon {
             }
         }
     }
+    // Just a test, don't pay attention
     /*
     static func subclasses<Weapon>(of theClass: Weapon) -> [Weapon] {
         var count: UInt32 = 0, result: [Weapon] = []
@@ -97,4 +100,5 @@ class Weapon {
 
         return result
     }
+    // End of the test
 }

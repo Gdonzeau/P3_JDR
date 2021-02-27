@@ -11,11 +11,12 @@ class Player {
     static var playerNamesUsed = [String]()
     static var numberOfHeroes:Int = 3
     
-    var myGo = false // À qui est-ce le tour de jouer ?
-    var magicChestChoiceFree = false //When a magicChest appears, does the player can get everyequipment including for other classes ? For example can a Barbarian get (and use) a fireBall ?
+    var myGo = false // is it your go or not ?
+    
+    private var magicChestChoiceFree = true //When a magicChest appears, does the player can get everyequipment including for other classes ? For example can a Barbarian get (and use) a fireBall ?
     
     var heroes = [Character]()
-    var heroesAlive = [Character]()
+    private var heroesAlive = [Character]()
     
     var name:String
     
@@ -101,7 +102,7 @@ class Player {
      */
     //MARK: Choice class
     
-    func choiceClass(number:Int,creator:String)->Int {
+    private func choiceClass(number:Int,creator:String)->Int {
         var response = 0
         print("\(creator), which class do you choose for your hero number \(number+1) ?",
               "\n1. Barbarian",
@@ -124,7 +125,7 @@ class Player {
     
     //MARK: Choice weapon
     
-    func choiceWeapon(career:Int) -> Weapon {
+    private func choiceWeapon(career:Int) -> Weapon {
         var retour = Weapon()
         var nameRetour = ""
         var choice = [Weapon]()
@@ -139,7 +140,6 @@ class Player {
             possibilities += [i]
         }
         if let answer = readLine() {
-            // Faire deux choix : correct et incorrect avec .count
             for test in possibilities {
                 if test+1 == Int(answer) {
                     nameRetour = choice[test].name
@@ -152,7 +152,7 @@ class Player {
     
     //MARK: What kind of weapon for who ?
     
-    func defineWeapons(name:String) ->Weapon {
+    private func defineWeapons(name:String) ->Weapon {
         var retour = Weapon()
         for i in 0 ..< Weapon.allWeapons.count {
             if name == Weapon.allWeapons[i].name {
@@ -164,7 +164,7 @@ class Player {
     
     //MARK: Giving name
     
-    func giveNameHero(number:Int,creator:String)->String { // On lui donne un nom
+    private func giveNameHero(number:Int,creator:String)->String { // On lui donne un nom
         var retour:String = ""
         print("\(creator), how do you name your \(self.heroes[number].classe) ?")
         
@@ -183,7 +183,7 @@ class Player {
     
     //MARK: Checking name
     
-    func checkNameHero(nameToCheck:String)->Bool {
+    private func checkNameHero(nameToCheck:String)->Bool {
         var nameDontExist = true
         for name in Character.heroNamesUsed {
             if nameToCheck == name {
@@ -228,7 +228,7 @@ class Player {
         target = Character(name: "", weapon: Weapon())
     }
     
-    func choiceHero()-> Character {// Affiche le nom des persos du joueurs
+    private func choiceHero()-> Character {// Affiche le nom des persos du joueurs
         var retour = Character(name: "", weapon: Weapon())
         var possibilities = [Int]()
         for i in 0..<self.heroesAlive.count {
@@ -255,7 +255,7 @@ class Player {
         return retour
     }
     
-    func choiceTarget(heal:Bool)-> Character {
+    private func choiceTarget(heal:Bool)-> Character {
         var retour = Character(name: "", weapon: Weapon())
         var possibilities = [Int]()
         // On vérifie si l'attaquant soigne ou attaque
@@ -317,7 +317,7 @@ class Player {
         }
     }
     
-    func magicChest(playingHero:Character) {
+    private func magicChest(playingHero:Character) {
         var joker = Int()
         if Int(arc4random_uniform(UInt32(100)))+1 <= game.probabilityOfChest { // On lance un D100 pour savoir si un coffre apparaît
             print("A chest appears in front of \(playingHero.name)")

@@ -10,42 +10,43 @@ import Foundation
 class Game {
     
     var players = [Player]()
-    var attacker = Player(name: "")
+    var attacker = Player(name: "") // Who is the attacker and who is the defender
     var defender = Player(name: "")
-    var numberOfPlayers = 2 // Combien de joueurs dans une partie
+    var numberOfPlayers = 2 // How many players
     var numberOfTurns = 0
-    let probabilityOfChest = 90 // Pourcentage de chance d'apparition d'un coffre
-    let chestIsGeneric = true //Can chest contain everything or just stuff adapted to hero opening it ?
+    let probabilityOfChest = 90 // % of chance that a magical chest appears
     
-    func startGame() { // Déroulement de la partie
-        // On crée autant de joueurs que nécessaire
-        Weapon.initializingChests()
+    func startGame() { // ... to start the game, yes !
+        
+        Weapon.initializingChests()// One chest for each class
         
         createPlayer(countStart: 0)
-        // Puis on crée autant de héros que nécessaire
+        
         for i in 0 ..< numberOfPlayers{
             players[i].creationHero(countStart: 0,creator:players[i].name)
         }
-        // On présente les différents héros
-        self.presentEveryBody()
-        // On décide qui commence
-        throwCoin()
         
-        while players[0].stillAlive() > 0 && players[1].stillAlive() > 0 {
+        self.presentEveryBody()
+        
+        throwCoin() // Who starts ?
+        
+        while players[0].stillAlive() > 0 && players[1].stillAlive() > 0 { // Still HP left ? Let's play
+            
             whoseTurnIsIt()
-            if checkForDraw() { break } // À retirer si on souhaite se baser sur la chance des coffres
+            if checkForDraw() { break } // If there are only healers, it is a draw. Put it in commentary to desactivate
             attacker.playTurn()
             attacker.findingSurvivals()
-            changeGo()
+            changeGo() // It is the other player's go and we start a new turn
         }
         endGame()
     }
     
-    func createPlayer(countStart:Int) { // On crée un joueur pour la partie
+    func createPlayer(countStart:Int) {
         for i in countStart ..< numberOfPlayers {
             players.append(Player.init(name: giveNamePlayer(number: i)))
+            // We create a new player. If his name is already taken (return will be ""), we delete the player and start again.
+            
             if players[i].name == "" {
-                
                 players.remove(at: i)
                 createPlayer(countStart: i)
                 break
@@ -56,7 +57,7 @@ class Game {
         }
     }
     
-    func giveNamePlayer(number:Int)->String { // On lui donne un nom
+    func giveNamePlayer(number:Int)->String { // We give a name to player...
         var retour:String = ""
         print("Hello player \(number+1), what's your name ?")
         
@@ -72,7 +73,7 @@ class Game {
         return retour
     }
     
-    func checkNamePlayer(nameToCheck:String)->Bool {
+    func checkNamePlayer(nameToCheck:String)->Bool { // ... and we check it
         var nameDontExist = true
         for name in Player.playerNamesUsed {
             if nameToCheck == name {
@@ -82,7 +83,7 @@ class Game {
         return nameDontExist
     }
     
-    func presentEveryBody() {
+    func presentEveryBody() { // Function to introcduce players and to ask each hero to introduce himself
         for i in 0 ..< numberOfPlayers {
             print("\nHere's \(players[i].name).",
                   "\nHe has \(Player.numberOfHeroes) heroes :")
@@ -93,30 +94,30 @@ class Game {
         }
     }
     
-    func throwCoin() {
-        let coin = Int(arc4random_uniform(UInt32(numberOfPlayers))) // On lance une pièce pour savoir qui commence
+    func throwCoin() { // Function to decide who starts
+        let coin = Int(arc4random_uniform(UInt32(numberOfPlayers)))
         print("\n\(players[coin].name) starts.")
         players[coin].myGo = true
     }
     
-    func whoseTurnIsIt() {
-        self.numberOfTurns += 1
+    func whoseTurnIsIt() { // Function to manage whose turn it is.
+        self.numberOfTurns += 1 // and how many turns are played
         for player in players {
-            if player.myGo {
-                attacker = player
+            if player.myGo { // It's my go ?
+                attacker = player // So I attack
             }
             else {
-                defender = player
+                defender = player // and you defend
             }
         }
         print("\nIt is \(attacker.name)'s go.")
     }
-    func changeGo() {
+    func changeGo() { // I just played, it's your go.
         players[0].myGo = !players[0].myGo
         players[1].myGo = !players[1].myGo
     }
     
-    func checkForDraw()->Bool { // If there are only healers left, nobody can wins. It is a draw
+    func checkForDraw()->Bool { // If there are only healers left, nobody can win. It is a draw.
         var onlyHealers = true
         for i in 0 ..< numberOfPlayers {
             for j in 0 ..< Player.numberOfHeroes {

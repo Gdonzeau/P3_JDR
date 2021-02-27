@@ -12,7 +12,7 @@ class Barbarian: Character {
     override var HPClass:Int { 120 }
     override var armor:Int { 0 }
     override var classe:String { "barbarian" }
-    override var hobby:String { "start fights at the inn" }
+    override var hobby:String { "start fights at the inn" } // A barbarian is a barbarian...
     override func presentHimSelf() {
         super.presentHimSelf()
         print("And this is cool !")
