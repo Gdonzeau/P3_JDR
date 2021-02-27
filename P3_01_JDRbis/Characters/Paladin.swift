@@ -10,6 +10,7 @@ import Foundation
 class Paladin: Character {
     override var HPClass:Int { 80 }
     override var armor:Int { 10 }
+    override var magicProtect:Int { 90 }
     override var classe:String { "un paladin" }
     override var hobby:String { "méditer" }
     override func presentHimSelf() {

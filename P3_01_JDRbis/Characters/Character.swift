@@ -27,9 +27,9 @@ class Character {
             return weapon.damage
         }
     }
-    var symbol:String {
+    var magicProtect:Int {
         get {
-            return "😀"
+            return 0
         }
     }
     var HPClass:Int {
@@ -68,9 +68,14 @@ class Character {
     func actionOn(receiver:Character) {
         var realDamage = 0
         if self.damage > 0 {
+            if receiver.magicProtection() { // If the magic protection active
+                print("Protection magique !")
+            }
+            else {
             realDamage = self.damage - receiver.armor
             print("\(self.name) attaque \(receiver.name)",
                   "\net lui inflige \(realDamage) points de dégat.")
+            }
         }
         else {
             realDamage = self.damage
@@ -116,6 +121,15 @@ class Character {
             }
         }
         return retour
+    }
+    
+    func magicProtection()->Bool {
+        if Int(arc4random_uniform(UInt32(100)))+1 < self.magicProtect {
+            return true
+        }
+        else {
+            return false
+        }
     }
     
 }
