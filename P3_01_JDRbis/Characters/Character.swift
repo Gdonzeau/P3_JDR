@@ -61,7 +61,7 @@ class Character {
     }
     
     func presentHimSelf() {
-        print ("Bonjour, je m'appelle \(self.name), je suis \(self.classe).",
+        print ("Bonjour, je m'appelle \(self.name), je suis un \(self.classe).",
                "\nJ'ai \(HPClass) PV et je suis équipé d'\(self.weapon.name).")
         if self.damage>0 {
             print("Au combat j'inflige \(self.damage) PV de dommage.")
@@ -88,19 +88,20 @@ class Character {
         else {
             realDamage = self.damage
             print("\(self.name) soigne \(receiver.name)",
-                  "\n\(receiver.name) récupère \(-self.damage).")
+                  "\n\(receiver.name) récupère \(-self.damage) PV.")
         }
         receiver.HPInGame -= realDamage
         if receiver.HPInGame < 0 {
             receiver.HPInGame = 0
         }
         
-        if receiver.HPInGame == 0 {
-            print("\(receiver.name) est mort.")
-        }
-        
         if receiver.HPInGame > receiver.HPClass {
             receiver.HPInGame = receiver.HPClass
+        }
+        
+        print("Il reste à \(receiver.name) \(receiver.HPInGame) PV.")
+        if receiver.HPInGame == 0 {
+            print("\(receiver.name) est mort.")
         }
     }
     

@@ -36,17 +36,6 @@ class Player {
                 career = choiceClass(number: i, creator: creator)
             }
             
-            while heroName == "" {
-                heroName = giveNameHero(number: i,creator:creator)
-            }
-            
-            while heroWeapon.name == "rien" {
-                heroWeapon = choiceWeapon(career: Int(career))
-            }
-            
-            //    createHero(Charac: <#T##Character#>, name: <#T##String#>, weapon: <#T##Weapon#>)
-            //    createHero(type(of: Character(name: name, weapon: Weapon)))
-            
             switch career {
             case 1:
                 heroes.append(Barbarian.init(name: heroName, weapon: heroWeapon))
@@ -63,11 +52,41 @@ class Player {
             default:
                 heroes.append(Character.init(name: heroName, weapon: heroWeapon))
             }
- 
+            
+            while heroName == "" {
+                heroName = giveNameHero(number: i,creator:creator)
+                heroes[i].name = heroName
+            }
+            
+            while heroWeapon.name == "rien" {
+                heroWeapon = choiceWeapon(career: Int(career))
+                heroes[i].weapon = heroWeapon
+            }
+            
+            //    createHero(Charac: <#T##Character#>, name: <#T##String#>, weapon: <#T##Weapon#>)
+            //    createHero(type(of: Character(name: name, weapon: Weapon)))
+     /*
+            switch career {
+            case 1:
+                heroes.append(Barbarian.init(name: heroName, weapon: heroWeapon))
+                
+            case 2:
+                heroes.append(Druid.init(name: heroName, weapon: heroWeapon))
+                
+            case 3:
+                heroes.append(Paladin.init(name: heroName, weapon: heroWeapon))
+                
+            case 4:
+                heroes.append(Mage.init(name: heroName, weapon: heroWeapon))
+                
+            default:
+                heroes.append(Character.init(name: heroName, weapon: heroWeapon))
+            }
+ */
             //Character.allClassesCreator[career]
             
             
-            print("Bonjour \(heroes[i].name)")
+            print("Bonjour \(heroes[i].name)\n")
             heroes[i].HPInGame = heroes[i].HPClass
             heroesAlive.append(heroes[i])
             career = 0
@@ -95,7 +114,6 @@ class Player {
                 if let retour = Int(answer) {
                     response = retour
                 }
-                
             }
             else {
                 print("Je n'ai pas compris, veuillez refaire votre choix.")
@@ -113,7 +131,7 @@ class Player {
         //var number = Int(career)
         choice = Weapon.allChests[career-1]
         
-        print("Vous pouvez choisir un équipement :")
+        print("\nChoisissez un équipement :")
         
         var possibilities = [Int]()
         for i in 0..<choice.count {
@@ -136,7 +154,6 @@ class Player {
     
     func defineWeapons(name:String) ->Weapon {
         var retour = Weapon()
-        //Amélioration possible :
         for i in 0 ..< Weapon.allWeapons.count {
             if name == Weapon.allWeapons[i].name {
                 retour = Weapon.allWeapons[i]
@@ -149,7 +166,7 @@ class Player {
     
     func giveNameHero(number:Int,creator:String)->String { // On lui donne un nom
         var retour:String = ""
-        print("\(creator), comment appelez-vous votre héros numéro \(number+1) ?")
+        print("\(creator), comment appelez-vous votre \(self.heroes[number].classe) ?")
         
         if let answer = readLine() {
             
@@ -158,7 +175,7 @@ class Player {
                 Character.heroNamesUsed += [retour]
             }
             else {
-                print("Le nom est déjà pris")
+                print("\nLe nom est déjà pris.\n")
             }
         }
         return retour
@@ -187,7 +204,7 @@ class Player {
         for i in 0 ..< Player.numberOfHeroes {
             retour += self.heroes[i].HPInGame
         }
-        print("Les héros de \(self.name) ont \(retour) PV restants.")
+        print("\nLes héros de \(self.name) ont \(retour) PV restants.")
         return retour
     }
     
@@ -248,7 +265,7 @@ class Player {
             }
             print("Qui choisissez-vous de soigner pour ce tour ?")
             for i in 0 ..< self.heroesAlive.count {
-                print("[\(i+1)]. \(self.heroesAlive[i].name)")
+                print("[\(i+1)]. \(self.heroesAlive[i].name) le \(self.heroesAlive[i].classe) qui a \(self.heroesAlive[i].HPInGame) PV.")
             }
             if let answer = readLine() {
                 var ok = false
@@ -271,7 +288,7 @@ class Player {
             }
             print("Qui choisissez-vous d'attaquer pour ce tour ?")
             for i in 0 ..< game.defender.heroesAlive.count {
-                print("[\(i+1)]. \(game.defender.heroesAlive[i].name)")
+                print("[\(i+1)]. \(game.defender.heroesAlive[i].name) le \(game.defender.heroesAlive[i].classe) qui a \(game.defender.heroesAlive[i].HPInGame) PV.")
             }
             if let answer = readLine() {
                 var ok = false
@@ -321,7 +338,7 @@ class Player {
             
             if let choice = readLine() {
                 if Int(choice) == 1 {
-                    playingHero.weapon = Weapon.allWeapons[joker]
+                    playingHero.weapon = Weapon.allChests[playingHero.ref][joker]
                 }
                 else {
                     // On pourrait aussi répéter en cas de réponse ni 1 ni 2. Mais si le joueur n'arrive pas à appuyer sur la bonne touche, c'est peut-être imprudent de lui laisser une arme. ;)

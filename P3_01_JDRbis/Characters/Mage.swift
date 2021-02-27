@@ -11,7 +11,7 @@ class Mage: Character {
     override var ref:Int { 3 }
     override var HPClass:Int { 50 }
     override var armor:Int { 0 }
-    override var classe:String { "un mage" }
+    override var classe:String { "mage" }
     override var hobby:String { "étudier les arcanes" }
     override func presentHimSelf() {
         super.presentHimSelf()

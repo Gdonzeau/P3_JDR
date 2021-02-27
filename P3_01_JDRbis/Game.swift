@@ -51,7 +51,7 @@ class Game {
                 break
             }
             else {
-                print("Bonjour \(players[i].name)")
+                print("Bonjour \(players[i].name)\n")
             }
         }
     }
@@ -87,7 +87,7 @@ class Game {
             print("\nVoici \(players[i].name).",
                   "\nIl possède \(Player.numberOfHeroes) personnages :")
             for j in 0 ..< Player.numberOfHeroes {
-                print("\n- \(players[i].heroes[j].classe) qui nous a déclaré :")
+                print("\n- Un \(players[i].heroes[j].classe) qui nous a déclaré :")
                 players[i].heroes[j].presentHimSelf()
             }
         }
@@ -95,7 +95,7 @@ class Game {
     
     func throwCoin() {
         let coin = Int(arc4random_uniform(UInt32(numberOfPlayers))) // On lance une pièce pour savoir qui commence
-        print("\(players[coin].name) commence.")
+        print("\n\(players[coin].name) commence.")
         players[coin].myGo = true
     }
     
@@ -109,7 +109,7 @@ class Game {
                 defender = player
             }
         }
-        print("C'est le tour de \(attacker.name).")
+        print("\nC'est le tour de \(attacker.name).")
     }
     func changeGo() {
         players[0].myGo = !players[0].myGo
