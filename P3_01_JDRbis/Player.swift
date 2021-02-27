@@ -39,7 +39,7 @@ class Player {
                 heroName = giveNameHero(number: i,creator:creator)
             }
             
-            while heroWeapon.name == "un petit bâton" {
+            while heroWeapon.name == "rien" {
                 heroWeapon = choiceWeapon(career: career)
             }
             
@@ -101,29 +101,51 @@ class Player {
     func choiceWeapon(career:String) -> Weapon {
         var retour = Weapon()
         var nameRetour = ""
-        var choice = [Weapon]() // On fait un tableau des armes existantes et autorisées en fonction de la classe du perso
-        for i in 0 ..< Weapon.allWeapons.count {
+        var choice = [Weapon]()
+        
+        // On fait un tableau des armes existantes et autorisées en fonction de la classe du perso
+    //    for i in 0 ..< Weapon.allWeapons.count {
             if career == "1" { // Armes autorisées pour le Barbare
+                 // This :
+                choice = Weapon.barbarianWeapons
+                // Or this one
+                /*
                 if Weapon.allWeapons[i].barbarianAuthorized {
                     choice += [Weapon.allWeapons[i]]
                 }
+ */
             }
-            if career == "2" { // Armes autorisées pour le Barbare
+            if career == "2" { // Armes autorisées pour le Paladin
+                // This :
+               choice = Weapon.paladinWeapons
+               // Or this one
+                /*
                 if Weapon.allWeapons[i].paladinAuthorized {
                     choice += [Weapon.allWeapons[i]]
                 }
+ */
             }
-            if career == "3" { // Armes autorisées pour le Barbare
+            if career == "3" { // Armes autorisées pour le Druide
+                // This :
+               choice = Weapon.druidWeapons
+               // Or this one
+                /*
                 if Weapon.allWeapons[i].druidAuthorized {
                     choice += [Weapon.allWeapons[i]]
                 }
+ */
             }
-            if career == "4" { // Armes autorisées pour le Barbare
+            if career == "4" { // Armes autorisées pour le Mage
+                // This :
+               choice = Weapon.mageWeapons
+               // Or this one
+                /*
                 if Weapon.allWeapons[i].mageAuthorized {
                     choice += [Weapon.allWeapons[i]]
                 }
+ */
             }
-        }
+     //   }
         print("Vous pouvez choisir un équipement :")
         
         var possibilities = [Int]()
