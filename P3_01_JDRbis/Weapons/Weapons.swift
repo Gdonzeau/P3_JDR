@@ -17,7 +17,7 @@ class Weapon {
     
     var name:String {
         get {
-            return "rien"
+            return "nothing"
         }
     }
     var damage:Int {

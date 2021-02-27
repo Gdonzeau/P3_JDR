@@ -12,10 +12,10 @@ class Druid: Character {
     override var HPClass:Int { 60 }
     override var armor:Int { 0 }
     override var magicProtect:Int { 60 }
-    override var classe:String { "druide" }
-    override var hobby:String { "me promener dans la forêt" }
+    override var classe:String { "druid" }
+    override var hobby:String { "walk in the forest" }
     override func presentHimSelf() {
         super.presentHimSelf()
-        print("Et c'est tout pour moi.")
+        print("And that's all.")
     }
 }

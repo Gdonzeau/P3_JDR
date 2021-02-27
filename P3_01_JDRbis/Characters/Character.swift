@@ -51,44 +51,44 @@ class Character {
     }
     var classe:String {
         get {
-            return "un personnage"
+            return "a character"
         }
     }
     var hobby:String {
         get {
-            return "me tourner les pouces"
+            return "to sleep"
         }
     }
     
     func presentHimSelf() {
-        print ("Bonjour, je m'appelle \(self.name), je suis un \(self.classe).",
-               "\nJ'ai \(HPClass) PV et je suis équipé d'\(self.weapon.name).")
+        print ("Hello, my name if \(self.name), I am a \(self.classe).",
+               "\nI have \(HPClass) HP and I am equipped with \(self.weapon.name).")
         if self.damage>0 {
-            print("Au combat j'inflige \(self.damage) PV de dommage.")
+            print("In combat I inflict \(self.damage) wounds of damage.")
         }
         else {
-            print("Au combat je soigne \(-self.damage) PV perdus.")
+            print("In combat I heal \(-self.damage) HP lost.")
         }
-        print("À mes heures perdues, j'aime bien \(self.hobby).")
+        print("In my spare time, I like to \(self.hobby).")
     }
     
     func actionOn(receiver:Character) {
         var realDamage = 0
         if self.damage > 0 {
             if receiver.magicProtection() { // If the magic protection active
-                print("\(self.name) attaque \(receiver.name)",
-                "La protection magique de \(receiver.name) s'active ! L'attaque est arrêtée !")
+                print("\(self.name) attacks \(receiver.name)",
+                "\(receiver.name)'s magic protection activated ! The attack is stopped !")
             }
             else {
             realDamage = self.damage - receiver.armor
-            print("\(self.name) attaque \(receiver.name)",
-                  "\net lui inflige \(realDamage) points de dégat.")
+            print("\(self.name) attacks \(receiver.name)",
+                  "\nand inflicts him \(realDamage) wounds of damage.")
             }
         }
         else {
             realDamage = self.damage
-            print("\(self.name) soigne \(receiver.name)",
-                  "\n\(receiver.name) récupère \(-self.damage) PV.")
+            print("\(self.name) heals \(receiver.name)",
+                  "\n\(receiver.name) recovers \(-self.damage) PV.")
         }
         receiver.HPInGame -= realDamage
         if receiver.HPInGame < 0 {
@@ -99,9 +99,9 @@ class Character {
             receiver.HPInGame = receiver.HPClass
         }
         
-        print("Il reste à \(receiver.name) \(receiver.HPInGame) PV.")
+        print("\(receiver.name) has \(receiver.HPInGame) HP left.")
         if receiver.HPInGame == 0 {
-            print("\(receiver.name) est mort.")
+            print("\(receiver.name) is dead.")
         }
     }
     

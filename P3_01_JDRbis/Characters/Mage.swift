@@ -12,9 +12,9 @@ class Mage: Character {
     override var HPClass:Int { 50 }
     override var armor:Int { 0 }
     override var classe:String { "mage" }
-    override var hobby:String { "étudier les arcanes" }
+    override var hobby:String { "study books" }
     override func presentHimSelf() {
         super.presentHimSelf()
-        print("Et voilà.")
+        print("It is very interesting.")
     }
 }

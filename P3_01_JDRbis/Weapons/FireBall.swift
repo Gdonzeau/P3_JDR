@@ -8,7 +8,7 @@
 import Foundation
 
 class Fireball:Weapon {
-    override var name: String { "une boule de feu" }
+    override var name: String { "a fire ball" }
     override var damage: Int { 50 }
     override var number:Int { 8 }
     override var heals:Bool { false }

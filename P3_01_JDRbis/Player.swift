@@ -58,7 +58,7 @@ class Player {
                 heroes[i].name = heroName
             }
             
-            while heroWeapon.name == "rien" {
+            while heroWeapon.name == "nothing" {
                 heroWeapon = choiceWeapon(career: Int(career))
                 heroes[i].weapon = heroWeapon
             }
@@ -86,7 +86,7 @@ class Player {
             //Character.allClassesCreator[career]
             
             
-            print("Bonjour \(heroes[i].name)\n")
+            print("Hello \(heroes[i].name)\n")
             heroes[i].HPInGame = heroes[i].HPClass
             heroesAlive.append(heroes[i])
             career = 0
@@ -103,9 +103,9 @@ class Player {
     
     func choiceClass(number:Int,creator:String)->Int {
         var response = 0
-        print("\(creator), quelle classe donnez-vous à votre héros numéro \(number+1) ?",
-              "\n1. Barbare",
-              "\n2. Druide",
+        print("\(creator), which class do you choose for your hero number \(number+1) ?",
+              "\n1. Barbarian",
+              "\n2. Druid",
               "\n3. Paladin",
               "\n4. Mage")
         
@@ -116,7 +116,7 @@ class Player {
                 }
             }
             else {
-                print("Je n'ai pas compris, veuillez refaire votre choix.")
+                print("I didn't undertand, please repeat.")
             }
         }
         return response
@@ -131,7 +131,7 @@ class Player {
         //var number = Int(career)
         choice = Weapon.allChests[career-1]
         
-        print("\nChoisissez un équipement :")
+        print("\nChoose an equipment :")
         
         var possibilities = [Int]()
         for i in 0..<choice.count {
@@ -166,7 +166,7 @@ class Player {
     
     func giveNameHero(number:Int,creator:String)->String { // On lui donne un nom
         var retour:String = ""
-        print("\(creator), comment appelez-vous votre \(self.heroes[number].classe) ?")
+        print("\(creator), how do you name your \(self.heroes[number].classe) ?")
         
         if let answer = readLine() {
             
@@ -175,7 +175,7 @@ class Player {
                 Character.heroNamesUsed += [retour]
             }
             else {
-                print("\nLe nom est déjà pris.\n")
+                print("\nName already choosen.\n")
             }
         }
         return retour
@@ -204,7 +204,7 @@ class Player {
         for i in 0 ..< Player.numberOfHeroes {
             retour += self.heroes[i].HPInGame
         }
-        print("\nLes héros de \(self.name) ont \(retour) PV restants.")
+        print("\n\(self.name)'s heroes have \(retour) HP left.")
         return retour
     }
     
@@ -234,7 +234,7 @@ class Player {
         for i in 0..<self.heroesAlive.count {
             possibilities += [i]
         }
-        print("Qui choisissez-vous pour ce tour ?")
+        print("Who do you choose for this turn ?")
         for i in 0 ..< self.heroesAlive.count {
             print("[\(i+1)]. \(self.heroesAlive[i].name)")
         }
@@ -243,13 +243,13 @@ class Player {
             for test in possibilities {
                 if test+1 == Int(answer) {
                     retour = self.heroesAlive[test]
-                    print("Très bien")
+                    print("Good.")
                     ok = true
                     break
                 }
             }
             if ok == false {
-                print("Je n'ai pas compris")
+                print("I didn't understand.")
             }
         }
         return retour
@@ -263,22 +263,22 @@ class Player {
             for i in 0..<self.heroesAlive.count {
                 possibilities += [i]
             }
-            print("Qui choisissez-vous de soigner pour ce tour ?")
+            print("Who do you want to heal ?")
             for i in 0 ..< self.heroesAlive.count {
-                print("[\(i+1)]. \(self.heroesAlive[i].name) le \(self.heroesAlive[i].classe) qui a \(self.heroesAlive[i].HPInGame) PV.")
+                print("[\(i+1)]. \(self.heroesAlive[i].name) the \(self.heroesAlive[i].classe) who has \(self.heroesAlive[i].HPInGame) HP left.")
             }
             if let answer = readLine() {
                 var ok = false
                 for test in possibilities {
                     if test+1 == Int(answer) {
                         retour = self.heroesAlive[test]
-                        print("Entendu")
+                        print("Ok")
                         ok = true
                         break
                     }
                 }
                 if ok == false {
-                    print("Je n'ai pas compris")
+                    print("Please repeat.")
                 }
             }
         }
@@ -286,22 +286,22 @@ class Player {
             for i in 0..<game.defender.heroesAlive.count {
                 possibilities += [i]
             }
-            print("Qui choisissez-vous d'attaquer pour ce tour ?")
+            print("Who do you want to attack ?")
             for i in 0 ..< game.defender.heroesAlive.count {
-                print("[\(i+1)]. \(game.defender.heroesAlive[i].name) le \(game.defender.heroesAlive[i].classe) qui a \(game.defender.heroesAlive[i].HPInGame) PV.")
+                print("[\(i+1)]. \(game.defender.heroesAlive[i].name) the \(game.defender.heroesAlive[i].classe) who has \(game.defender.heroesAlive[i].HPInGame) HP left.")
             }
             if let answer = readLine() {
                 var ok = false
                 for test in possibilities {
                     if test+1 == Int(answer) {
                         retour = game.defender.heroesAlive[test]
-                        print("Parfait")
+                        print("All right.")
                         ok = true
                         break
                     }
                 }
                 if ok == false {
-                    print("Je n'ai pas compris")
+                    print("I didn't understand.")
                 }
             }
         }
@@ -320,29 +320,30 @@ class Player {
     func magicChest(playingHero:Character) {
         var joker = Int()
         if Int(arc4random_uniform(UInt32(100)))+1 <= game.probabilityOfChest { // On lance un D100 pour savoir si un coffre apparaît
-            print("Un coffre apparaît devant \(playingHero.name)")
+            print("A chest appears in front of \(playingHero.name)")
             if magicChestChoiceFree {
             // Generic Chest
             joker = Int(arc4random_uniform(UInt32(Weapon.allWeapons.count)))
-            print("Le coffre contient \(Weapon.allWeapons[joker].name)")
-            print("Souhaitez-vous échanger \(playingHero.weapon.name) contre \(Weapon.allWeapons[joker].name)")
+            print("The chest contains \(Weapon.allWeapons[joker].name)")
+            print("Do you want to exchange \(playingHero.weapon.name) for \(Weapon.allWeapons[joker].name)")
         }
         else {
             // Personnal chest
             joker = Int(arc4random_uniform(UInt32(Weapon.allChests[playingHero.ref].count)))
-            print("Le coffre contient \(Weapon.allChests[playingHero.ref][joker].name)")
-            print("Souhaitez-vous échanger \(playingHero.weapon.name) contre \(Weapon.allChests[playingHero.ref][joker].name)")
+            print("The chest contains \(Weapon.allChests[playingHero.ref][joker].name)")
+            print("Do you want to exchange \(playingHero.weapon.name) for \(Weapon.allChests[playingHero.ref][joker].name)")
         }
-            print("1. Oui")
-            print("2. Non")
+            print("1. Yes")
+            print("2. No")
             
             if let choice = readLine() {
                 if Int(choice) == 1 {
+                    print("Let's change.")
                     playingHero.weapon = Weapon.allChests[playingHero.ref][joker]
                 }
                 else {
                     // On pourrait aussi répéter en cas de réponse ni 1 ni 2. Mais si le joueur n'arrive pas à appuyer sur la bonne touche, c'est peut-être imprudent de lui laisser une arme. ;)
-                    print("On ne change pas")
+                    print("No change")
                 }
             }
         }

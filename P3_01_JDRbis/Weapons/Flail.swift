@@ -8,7 +8,7 @@
 import Foundation
 
 class Flail:Weapon {
-    override var name: String { "un fléau" }
+    override var name: String { "a flail" }
     override var damage: Int { 45 }
     override var number:Int { 3 }
     override var heals:Bool { false }

@@ -11,10 +11,10 @@ class Barbarian: Character {
     override var ref:Int { 0 }
     override var HPClass:Int { 120 }
     override var armor:Int { 0 }
-    override var classe:String { "barbare" }
-    override var hobby:String { "taper sur les gens" }
+    override var classe:String { "barbarian" }
+    override var hobby:String { "start fights at the inn" }
     override func presentHimSelf() {
         super.presentHimSelf()
-        print("Et c'est chouette.")
+        print("And this is cool !")
     }
 }

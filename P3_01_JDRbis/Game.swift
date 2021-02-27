@@ -51,14 +51,14 @@ class Game {
                 break
             }
             else {
-                print("Bonjour \(players[i].name)\n")
+                print("Hello \(players[i].name)\n")
             }
         }
     }
     
     func giveNamePlayer(number:Int)->String { // On lui donne un nom
         var retour:String = ""
-        print("Bonjour joueur \(number+1), comment vous appelez-vous ?")
+        print("Hello player \(number+1), what's your name ?")
         
         if let answer = readLine() {
             
@@ -66,7 +66,7 @@ class Game {
                 retour = answer
             }
             else {
-                print("Le nom est déjà pris")
+                print("This name is not available.")
             }
         }
         return retour
@@ -84,10 +84,10 @@ class Game {
     
     func presentEveryBody() {
         for i in 0 ..< numberOfPlayers {
-            print("\nVoici \(players[i].name).",
-                  "\nIl possède \(Player.numberOfHeroes) personnages :")
+            print("\nHere's \(players[i].name).",
+                  "\nHe has \(Player.numberOfHeroes) heroes :")
             for j in 0 ..< Player.numberOfHeroes {
-                print("\n- Un \(players[i].heroes[j].classe) qui nous a déclaré :")
+                print("\n- One \(players[i].heroes[j].classe) who told us :")
                 players[i].heroes[j].presentHimSelf()
             }
         }
@@ -95,7 +95,7 @@ class Game {
     
     func throwCoin() {
         let coin = Int(arc4random_uniform(UInt32(numberOfPlayers))) // On lance une pièce pour savoir qui commence
-        print("\n\(players[coin].name) commence.")
+        print("\n\(players[coin].name) starts.")
         players[coin].myGo = true
     }
     
@@ -109,7 +109,7 @@ class Game {
                 defender = player
             }
         }
-        print("\nC'est le tour de \(attacker.name).")
+        print("\nIt is \(attacker.name)'s go.")
     }
     func changeGo() {
         players[0].myGo = !players[0].myGo
@@ -126,18 +126,18 @@ class Game {
                 }
             }
         }
-        if onlyHealers {print("Il n'y a plus aucun combattant capable de blesser. Égalité.")}
+        if onlyHealers {print("There are no more fighters able to wouhd. This is a draw.")}
         return onlyHealers
     }
     
     func endGame() { //Mr. Stark ?
-        print("Partie terminée.",
-              "\nElle a duré : \(numberOfTurns) tours.")
+        print("Game over.",
+              "\nThe game lasted : \(numberOfTurns) turns.")
         if players[0].stillAlive() == 0 {
-            print("\(players[1].name) a gagné.")
+            print("\(players[1].name) won.")
         }
         if players[1].stillAlive() == 0 {
-            print("\(players[0].name) a gagné.")
+            print("\(players[0].name) won.")
         }
     }
 }

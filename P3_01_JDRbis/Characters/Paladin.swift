@@ -13,9 +13,9 @@ class Paladin: Character {
     override var armor:Int { 10 }
     override var magicProtect:Int { 20 }
     override var classe:String { "paladin" }
-    override var hobby:String { "méditer" }
+    override var hobby:String { "meditate" }
     override func presentHimSelf() {
         super.presentHimSelf()
-        print("Je pense que c'est tout.")
+        print("And it is a good thing.")
     }
 }

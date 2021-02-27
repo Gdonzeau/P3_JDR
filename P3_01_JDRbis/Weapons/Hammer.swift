@@ -8,7 +8,7 @@
 import Foundation
 
 class Hammer:Weapon {
-    override var name: String { "un marteau" }
+    override var name: String { "a hammer" }
     override var damage: Int { 40 }
     override var number:Int { 2 }
     override var heals:Bool { false }
