@@ -10,7 +10,7 @@ import Foundation
 class Player {
     static var playerNamesUsed = [String]()
     static var numberOfHeroes:Int = 3
-    
+    private let probabilityOfChest = 90 // % of chance that a magical chest appears
     var myGo = false // is it your go or not ?
     
     private var magicChestChoiceFree = true //When a magicChest appears, does the player can get everyequipment including for other classes ? For example can a Barbarian get (and use) a fireBall ?
@@ -32,8 +32,8 @@ class Player {
         var heroName = ""
         var heroWeapon = Weapon()
         for i in countStart ..< Player.numberOfHeroes {
-            
-            while career == 0 { // Tant que la réponse n'est pas compréhensible, on redemande
+            // As far as we didn't receive a correct answer...
+            while career == 0 { //... for career
                 career = choiceClass(number: i, creator: creator)
             }
             
@@ -54,39 +54,22 @@ class Player {
                 heroes.append(Character.init(name: heroName, weapon: heroWeapon))
             }
             
-            while heroName == "" {
+            while heroName == "" { // ... for name
                 heroName = giveNameHero(number: i,creator:creator)
                 heroes[i].name = heroName
             }
             
-            while heroWeapon.name == "nothing" {
+            while heroWeapon.name == "nothing" { // ... and for weapon
                 heroWeapon = choiceWeapon(career: Int(career))
                 heroes[i].weapon = heroWeapon
             }
             
             //    createHero(Charac: <#T##Character#>, name: <#T##String#>, weapon: <#T##Weapon#>)
             //    createHero(type(of: Character(name: name, weapon: Weapon)))
-     /*
-            switch career {
-            case 1:
-                heroes.append(Barbarian.init(name: heroName, weapon: heroWeapon))
-                
-            case 2:
-                heroes.append(Druid.init(name: heroName, weapon: heroWeapon))
-                
-            case 3:
-                heroes.append(Paladin.init(name: heroName, weapon: heroWeapon))
-                
-            case 4:
-                heroes.append(Mage.init(name: heroName, weapon: heroWeapon))
-                
-            default:
-                heroes.append(Character.init(name: heroName, weapon: heroWeapon))
-            }
- */
+            
             //Character.allClassesCreator[career]
             
-            
+            // The character is created, initialized and added
             print("Hello \(heroes[i].name)\n")
             heroes[i].HPInGame = heroes[i].HPClass
             heroesAlive.append(heroes[i])
@@ -114,10 +97,11 @@ class Player {
             if Int(answer) == 1 || Int(answer) == 2 || Int(answer) == 3 || Int(answer) == 4 {
                 if let retour = Int(answer) {
                     response = retour
+                    // If we receive an optionnal, type Int which is 1,2,3 or 4 we go on.
                 }
             }
             else {
-                print("I didn't undertand, please repeat.")
+                print("I didn't understand, please repeat.")
             }
         }
         return response
@@ -150,7 +134,7 @@ class Player {
         return retour
     }
     
-    //MARK: What kind of weapon for who ?
+    //MARK: Which Weapon for who ?
     
     private func defineWeapons(name:String) ->Weapon {
         var retour = Weapon()
@@ -164,7 +148,7 @@ class Player {
     
     //MARK: Giving name
     
-    private func giveNameHero(number:Int,creator:String)->String { // On lui donne un nom
+    private func giveNameHero(number:Int,creator:String)->String { // Let's give a name
         var retour:String = ""
         print("\(creator), how do you name your \(self.heroes[number].classe) ?")
         
@@ -185,7 +169,7 @@ class Player {
     
     private func checkNameHero(nameToCheck:String)->Bool {
         var nameDontExist = true
-        for name in Character.heroNamesUsed {
+        for name in Character.heroNamesUsed { // We compare the proposed name with names already created
             if nameToCheck == name {
                 nameDontExist = false
             }
@@ -208,6 +192,9 @@ class Player {
         return retour
     }
     
+    
+    //MARK: TURN - MAIN FUNCTION
+    
     func playTurn() {
         var heroActivated = Character(name: "", weapon: Weapon())
         var target = Character(name: "", weapon: Weapon())
@@ -228,7 +215,7 @@ class Player {
         target = Character(name: "", weapon: Weapon())
     }
     
-    private func choiceHero()-> Character {// Affiche le nom des persos du joueurs
+    private func choiceHero()-> Character {// Let's show which character can play
         var retour = Character(name: "", weapon: Weapon())
         var possibilities = [Int]()
         for i in 0..<self.heroesAlive.count {
@@ -258,7 +245,7 @@ class Player {
     private func choiceTarget(heal:Bool)-> Character {
         var retour = Character(name: "", weapon: Weapon())
         var possibilities = [Int]()
-        // On vérifie si l'attaquant soigne ou attaque
+        // We check if the attacker's equipment can attack o heal to propose the appropriated target.
         if heal {
             for i in 0..<self.heroesAlive.count {
                 possibilities += [i]
@@ -308,42 +295,61 @@ class Player {
         return retour
     }
     
+    //MARK: WHO IS ALIVE
+    
     func findingSurvivals() { // Checking who is still alive. Updating array heroesAlive
-        game.defender.heroesAlive = [Character]() // On vide le tableau et on supprime les cases
-        for i in 0 ..< Player.numberOfHeroes { // Et on le refait
+        game.defender.heroesAlive = [Character]() // Let's empty the array.
+        for i in 0 ..< Player.numberOfHeroes { // And let's build it again
             if game.defender.heroes[i].HPInGame > 0 {
                 game.defender.heroesAlive.append(game.defender.heroes[i])
             }
         }
     }
     
+    // MARK: THE MAGIC CHEST
+    
     private func magicChest(playingHero:Character) {
         var joker = Int()
-        if Int(arc4random_uniform(UInt32(100)))+1 <= game.probabilityOfChest { // On lance un D100 pour savoir si un coffre apparaît
+        if Int(arc4random_uniform(UInt32(100)))+1 <= probabilityOfChest { // We throw a D100 to know if a chest appears
             print("A chest appears in front of \(playingHero.name)")
             if magicChestChoiceFree {
-            // Generic Chest
-            joker = Int(arc4random_uniform(UInt32(Weapon.allWeapons.count)))
-            print("The chest contains \(Weapon.allWeapons[joker].name)")
-            print("Do you want to exchange \(playingHero.weapon.name) for \(Weapon.allWeapons[joker].name)")
-        }
-        else {
-            // Personnal chest
-            joker = Int(arc4random_uniform(UInt32(Weapon.allChests[playingHero.ref].count)))
-            print("The chest contains \(Weapon.allChests[playingHero.ref][joker].name)")
-            print("Do you want to exchange \(playingHero.weapon.name) for \(Weapon.allChests[playingHero.ref][joker].name)")
-        }
-            print("1. Yes")
-            print("2. No")
-            
-            if let choice = readLine() {
-                if Int(choice) == 1 {
-                    print("Let's change.")
-                    playingHero.weapon = Weapon.allChests[playingHero.ref][joker]
+                // Generic Chest
+                joker = Int(arc4random_uniform(UInt32(Weapon.allWeapons.count)))
+                print("The chest contains \(Weapon.allWeapons[joker].name)")
+                print("Do you want to exchange \(playingHero.weapon.name) for \(Weapon.allWeapons[joker].name)")
+                
+                print("1. Yes")
+                print("2. No")
+                
+                if let choice = readLine() {
+                    if Int(choice) == 1 {
+                        print("Let's change.")
+                        playingHero.weapon = Weapon.allWeapons[joker]
+                    }
+                    else {
+                        // On pourrait aussi répéter en cas de réponse ni 1 ni 2. Mais si le joueur n'arrive pas à appuyer sur la bonne touche, c'est peut-être imprudent de lui laisser une arme. ;)
+                        print("No change")
+                    }
                 }
-                else {
-                    // On pourrait aussi répéter en cas de réponse ni 1 ni 2. Mais si le joueur n'arrive pas à appuyer sur la bonne touche, c'est peut-être imprudent de lui laisser une arme. ;)
-                    print("No change")
+            }
+            else {
+                // Personnal chest
+                joker = Int(arc4random_uniform(UInt32(Weapon.allChests[playingHero.ref].count)))
+                print("The chest contains \(Weapon.allChests[playingHero.ref][joker].name)")
+                print("Do you want to exchange \(playingHero.weapon.name) for \(Weapon.allChests[playingHero.ref][joker].name)")
+                
+                print("1. Yes")
+                print("2. No")
+                
+                if let choice = readLine() {
+                    if Int(choice) == 1 {
+                        print("Let's change.")
+                        playingHero.weapon = Weapon.allChests[playingHero.ref][joker]
+                    }
+                    else {
+                        // On pourrait aussi répéter en cas de réponse ni 1 ni 2. Mais si le joueur n'arrive pas à appuyer sur la bonne touche, c'est peut-être imprudent de lui laisser une arme. ;)
+                        print("No change")
+                    }
                 }
             }
         }

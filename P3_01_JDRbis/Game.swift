@@ -9,12 +9,12 @@ import Foundation
 
 class Game {
     
-    var players = [Player]()
-    var attacker = Player(name: "") // Who is the attacker and who is the defender
+    private var players = [Player]()
+    private var attacker = Player(name: "") // Who is the attacker and who is the defender
     var defender = Player(name: "")
-    var numberOfPlayers = 2 // How many players
-    var numberOfTurns = 0
-    let probabilityOfChest = 90 // % of chance that a magical chest appears
+    private var numberOfPlayers = 2 // How many players
+    private var numberOfTurns = 0
+    //let probabilityOfChest = 90 // % of chance that a magical chest appears
     
     func startGame() { // ... to start the game, yes !
         
@@ -41,7 +41,7 @@ class Game {
         endGame()
     }
     
-    func createPlayer(countStart:Int) {
+    private func createPlayer(countStart:Int) {
         for i in countStart ..< numberOfPlayers {
             players.append(Player.init(name: giveNamePlayer(number: i)))
             // We create a new player. If his name is already taken (return will be ""), we delete the player and start again.
@@ -57,7 +57,7 @@ class Game {
         }
     }
     
-    func giveNamePlayer(number:Int)->String { // We give a name to player...
+    private func giveNamePlayer(number:Int)->String { // We give a name to player...
         var retour:String = ""
         print("Hello player \(number+1), what's your name ?")
         
@@ -73,7 +73,7 @@ class Game {
         return retour
     }
     
-    func checkNamePlayer(nameToCheck:String)->Bool { // ... and we check it
+    private func checkNamePlayer(nameToCheck:String)->Bool { // ... and we check it
         var nameDontExist = true
         for name in Player.playerNamesUsed {
             if nameToCheck == name {
@@ -83,7 +83,7 @@ class Game {
         return nameDontExist
     }
     
-    func presentEveryBody() { // Function to introcduce players and to ask each hero to introduce himself
+    private func presentEveryBody() { // Function to introcduce players and to ask each hero to introduce himself
         for i in 0 ..< numberOfPlayers {
             print("\nHere's \(players[i].name).",
                   "\nHe has \(Player.numberOfHeroes) heroes :")
@@ -94,13 +94,13 @@ class Game {
         }
     }
     
-    func throwCoin() { // Function to decide who starts
+    private func throwCoin() { // Function to decide who starts
         let coin = Int(arc4random_uniform(UInt32(numberOfPlayers)))
         print("\n\(players[coin].name) starts.")
         players[coin].myGo = true
     }
     
-    func whoseTurnIsIt() { // Function to manage whose turn it is.
+    private func whoseTurnIsIt() { // Function to manage whose turn it is.
         self.numberOfTurns += 1 // and how many turns are played
         for player in players {
             if player.myGo { // It's my go ?
@@ -112,12 +112,12 @@ class Game {
         }
         print("\nIt is \(attacker.name)'s go.")
     }
-    func changeGo() { // I just played, it's your go.
+    private func changeGo() { // I just played, it's your go.
         players[0].myGo = !players[0].myGo
         players[1].myGo = !players[1].myGo
     }
     
-    func checkForDraw()->Bool { // If there are only healers left, nobody can win. It is a draw.
+    private func checkForDraw()->Bool { // If there are only healers left, nobody can win. It is a draw.
         var onlyHealers = true
         for i in 0 ..< numberOfPlayers {
             for j in 0 ..< Player.numberOfHeroes {
@@ -131,7 +131,7 @@ class Game {
         return onlyHealers
     }
     
-    func endGame() { //Mr. Stark ?
+    private func endGame() { //Mr. Stark ?
         print("Game over.",
               "\nThe game lasted : \(numberOfTurns) turns.")
         if players[0].stillAlive() == 0 {

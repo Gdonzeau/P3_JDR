@@ -8,7 +8,7 @@
 import Foundation
 
 class Weapon {
-    // Chests which contains weapons
+    // Chests which contain weapons
     static var allWeapons = [Axe(),BigHealingSpell(),Dagger(),Flail(),Hammer(),HealingSpell(),Sword(),Fireball(),SmallClub()]
     static var barbarianWeapons = [Weapon]()
     static var paladinWeapons = [Weapon]()

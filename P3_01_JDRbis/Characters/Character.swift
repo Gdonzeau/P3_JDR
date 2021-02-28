@@ -14,8 +14,8 @@ class Character {
     // All types of Characters
     static var allClasses = [Barbarian(name: "", weapon: Weapon()),Druid(name: "", weapon: Weapon()),Paladin(name: "", weapon: Weapon()),Mage(name: "", weapon: Weapon())]
     /*
-    static var allClassesCreator = [Barbarian.init(name: "", weapon: Weapon()),Druid.init(name: "", weapon: Weapon()),Paladin.init(name: "", weapon: Weapon()),Mage.init(name: "", weapon: Weapon())]
-    */
+     static var allClassesCreator = [Barbarian.init(name: "", weapon: Weapon()),Druid.init(name: "", weapon: Weapon()),Paladin.init(name: "", weapon: Weapon()),Mage.init(name: "", weapon: Weapon())]
+     */
     
     var name:String
     
@@ -38,7 +38,7 @@ class Character {
             return weapon.damage
         }
     }
-    var magicProtect:Int { // % of chance that a magical protection cancel the attack. If you don't want any magic protection put 0 to every class.
+    var magicProtect:Int { // % of chance that a magical protection cancels the attack. If you don't want any magic protection put 0 to every class.
         get {
             return 0
         }
@@ -64,6 +64,8 @@ class Character {
         }
     }
     
+    //MARK: Introducing
+    
     func presentHimSelf() { // The character presents himself
         print ("Hello, my name if \(self.name), I am a \(self.classe).",
                "\nI have \(HPClass) HP and I am equipped with \(self.weapon.name).")
@@ -76,17 +78,20 @@ class Character {
         print("In my spare time, I like to \(self.hobby).")
     }
     
+    // MARK: Fighting
+    
     func actionOn(receiver:Character) { // Character's actions : heal or wound
         var realDamage = 0
-        if self.damage > 0 { // Of : if self.weapon.heals == false // If character wounds
+        if self.damage > 0 { // Or : if self.weapon.heals == false // If character wounds
+            
             if receiver.magicProtection() { // If the magic protection actived itself
                 print("\(self.name) attacks \(receiver.name).",
-                "\n\(receiver.name)'s magic protection activates ! The attack is stopped !")
+                      "\n\(receiver.name)'s magic protection activates ! The attack is stopped !")
             }
             else { // If the magic protection didn't active itself
-            realDamage = self.damage - receiver.armor
-            print("\(self.name) attacks \(receiver.name)",
-                  "\nand inflicts him \(realDamage) wounds of damage.")
+                realDamage = self.damage - receiver.armor
+                print("\(self.name) attacks \(receiver.name)",
+                      "\nand inflicts him \(realDamage) wounds of damage.")
             }
         } // If character heals
         else {
@@ -110,23 +115,23 @@ class Character {
             print("\(receiver.name) is dead.")
         }
     }
-    
+    // MARK: Compare
     func compare(compared:Character)->Character { // Utiliser des tuples ?
         var retour:Character
-        if self.damage > compared.damage {
+        if self.damage > compared.damage { // who makes more damage ?
             retour = self
         }
         else if self.damage < compared.damage {
             retour = compared
         }
-         else { // Les dommages sont égaux, on compare les PV de classe
+        else { // Same damages ? How about HP ?
             if self.HPClass > compared.HPClass {
                 retour = self
             }
             else if self.HPClass < compared.HPClass {
                 retour = compared
             }
-            else {
+            else { // Same HP ? So who lost less HP. If draw, self wins.
                 if self.HPInGame < compared.HPInGame {
                     retour = compared
                 }
@@ -138,6 +143,7 @@ class Character {
         return retour
     }
     
+    // MARK: Magic protection
     private func magicProtection()->Bool { // Does magic protection work ?
         if Int(arc4random_uniform(UInt32(100)))+1 < self.magicProtect {
             return true
