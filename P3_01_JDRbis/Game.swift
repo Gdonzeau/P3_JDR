@@ -9,21 +9,20 @@ import Foundation
 
 class Game {
     
-    private var players = [Player]()
+    var players = [Player]()
     private var attacker = Player(name: "") // Who is the attacker and who is the defender
     var defender = Player(name: "")
-    private var numberOfPlayers = 2 // How many players
+    //private var numberOfPlayers = 2 // How many players
     private var numberOfTurns = 0
-    //let probabilityOfChest = 90 // % of chance that a magical chest appears
     
     func startGame() { // ... to start the game, yes !
         
         Weapon.initializingChests()// One chest for each class
         
-        createPlayer(countStart: 0)
+        Player.createPlayer()
         
-        for i in 0 ..< numberOfPlayers{
-            players[i].creationHero(countStart: 0,creator:players[i].name)
+        for i in 0 ..< Player.numberOfPlayers {
+            players[i].creationHero(creator:players[i].name)
         }
         
         self.presentEveryBody()
@@ -40,7 +39,7 @@ class Game {
         }
         endGame()
     }
-    
+    /*
     private func createPlayer(countStart:Int) {
         for i in countStart ..< numberOfPlayers {
             players.append(Player.init(name: giveNamePlayer(number: i)))
@@ -82,9 +81,10 @@ class Game {
         }
         return nameDontExist
     }
-    
+ */
+ 
     private func presentEveryBody() { // Function to introcduce players and to ask each hero to introduce himself
-        for i in 0 ..< numberOfPlayers {
+        for i in 0 ..< Player.numberOfPlayers {
             print("\nHere's \(players[i].name).",
                   "\nHe has \(Player.numberOfHeroes) heroes :")
             for j in 0 ..< Player.numberOfHeroes {
@@ -95,7 +95,7 @@ class Game {
     }
     
     private func throwCoin() { // Function to decide who starts
-        let coin = Int(arc4random_uniform(UInt32(numberOfPlayers)))
+        let coin = Int(arc4random_uniform(UInt32(Player.numberOfPlayers)))
         print("\n\(players[coin].name) starts.")
         players[coin].myGo = true
     }
@@ -112,14 +112,14 @@ class Game {
         }
         print("\nIt is \(attacker.name)'s go.")
     }
-    private func changeGo() { // I just played, it's your go.
+    private func changeGo() { // I just played, it's your turn.
         players[0].myGo = !players[0].myGo
         players[1].myGo = !players[1].myGo
     }
     
     private func checkForDraw()->Bool { // If there are only healers left, nobody can win. It is a draw.
         var onlyHealers = true
-        for i in 0 ..< numberOfPlayers {
+        for i in 0 ..< Player.numberOfPlayers {
             for j in 0 ..< Player.numberOfHeroes {
                 if players[i].heroes[j].weapon.heals == false {
                     onlyHealers = false

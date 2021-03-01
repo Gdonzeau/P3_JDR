@@ -10,6 +10,7 @@ import Foundation
 class Player {
     static var playerNamesUsed = [String]()
     static var numberOfHeroes:Int = 3
+    static var numberOfPlayers = 2
     private let probabilityOfChest = 90 // % of chance that a magical chest appears
     var myGo = false // is it your go or not ?
     
@@ -22,16 +23,74 @@ class Player {
     
     init(name:String) {
         self.name = name
-        Player.playerNamesUsed += [name]
+        //Player.playerNamesUsed += [name]
     }
     
-    // MARK: CREATION
+    //MARK: CREATION PLAYER
     
-    func creationHero(countStart:Int,creator:String) {
+    static func createPlayer() {
+        for i in 0 ..< Player.numberOfPlayers {
+            
+            let newPlayer = Player(name: "")
+            
+            while newPlayer.name == "" {
+            newPlayer.name = giveNamePlayer(number: i)
+                Player.playerNamesUsed.append(newPlayer.name)
+            }
+            game.players.append(newPlayer)
+            
+            
+            /*
+            giveNamePlayer(number:i)
+            game.players.append(Player(name: giveNamePlayer(number: i)))
+            // We create a new player. If his name is already taken (return will be ""), we delete the player and start again.
+            
+            if game.players[i].name == "" {
+                game.players.remove(at: i)
+                createPlayer()
+                break
+            }
+            else {
+                print("Hello \(game.players[i].name)\n")
+            }
+ */
+        }
+ 
+    }
+    
+    static func giveNamePlayer(number:Int)->String { // We give a name to player...
+        var retour:String = ""
+        print("Hello player \(number+1), what's your name ?")
+        
+        if let answer = readLine() {
+            
+            if checkNamePlayer(nameToCheck:answer) {
+                retour = answer
+            }
+            else {
+                print("This name is not available.")
+            }
+        }
+        return retour
+    }
+    
+    static func checkNamePlayer(nameToCheck:String)->Bool { // ... and we check it
+        var nameDontExist = true
+        for name in Player.playerNamesUsed {
+            if nameToCheck == name {
+                nameDontExist = false
+            }
+        }
+        return nameDontExist
+    }
+    
+    // MARK: CREATION HERO
+    
+    func creationHero(creator:String) {
         var career = 0
         var heroName = ""
         var heroWeapon = Weapon()
-        for i in countStart ..< Player.numberOfHeroes {
+        for i in 0 ..< Player.numberOfHeroes {
             // As far as we didn't receive a correct answer...
             while career == 0 { //... for career
                 career = choiceClass(number: i, creator: creator)
