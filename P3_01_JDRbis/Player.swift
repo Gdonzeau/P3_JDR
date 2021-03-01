@@ -12,7 +12,7 @@ class Player {
     static var numberOfHeroes:Int = 3
     static var numberOfPlayers = 2
     private let probabilityOfChest = 90 // % of chance that a magical chest appears
-    var myGo = false // is it your go or not ?
+    var myTurn = false // is it your go or not ?
     
     private var magicChestChoiceFree = true //When a magicChest appears, does the player can get everyequipment including for other classes ? For example can a Barbarian get (and use) a fireBall ?
     
@@ -23,7 +23,6 @@ class Player {
     
     init(name:String) {
         self.name = name
-        //Player.playerNamesUsed += [name]
     }
     
     //MARK: CREATION PLAYER
@@ -38,24 +37,7 @@ class Player {
                 Player.playerNamesUsed.append(newPlayer.name)
             }
             game.players.append(newPlayer)
-            
-            
-            /*
-            giveNamePlayer(number:i)
-            game.players.append(Player(name: giveNamePlayer(number: i)))
-            // We create a new player. If his name is already taken (return will be ""), we delete the player and start again.
-            
-            if game.players[i].name == "" {
-                game.players.remove(at: i)
-                createPlayer()
-                break
-            }
-            else {
-                print("Hello \(game.players[i].name)\n")
-            }
- */
         }
- 
     }
     
     static func giveNamePlayer(number:Int)->String { // We give a name to player...
@@ -95,7 +77,7 @@ class Player {
             while career == 0 { //... for career
                 career = choiceClass(number: i, creator: creator)
             }
-            
+
             switch career {
             case 1:
                 heroes.append(Barbarian.init(name: heroName, weapon: heroWeapon))
@@ -123,12 +105,6 @@ class Player {
                 heroes[i].weapon = heroWeapon
             }
             
-            //    createHero(Charac: <#T##Character#>, name: <#T##String#>, weapon: <#T##Weapon#>)
-            //    createHero(type(of: Character(name: name, weapon: Weapon)))
-            
-            //Character.allClassesCreator[career]
-            
-            // The character is created, initialized and added
             print("Hello \(heroes[i].name)\n")
             heroes[i].HPInGame = heroes[i].HPClass
             heroesAlive.append(heroes[i])
@@ -137,11 +113,7 @@ class Player {
             heroWeapon = Weapon()
         }
     }
-    /*
-     func createHero(Carac : Character.init(name:String,weapon:Weapon)) {
-     heroes.append(Carac)
-     }
-     */
+    
     //MARK: Choice class
     
     private func choiceClass(number:Int,creator:String)->Int {
@@ -172,7 +144,6 @@ class Player {
         var retour = Weapon()
         var nameRetour = ""
         var choice = [Weapon]()
-        //var number = Int(career)
         choice = Weapon.allChests[career-1]
         
         print("\nChoose an equipment :")
@@ -250,7 +221,6 @@ class Player {
         print("\n\(self.name)'s heroes have \(retour) HP left.")
         return retour
     }
-    
     
     //MARK: TURN - MAIN FUNCTION
     
@@ -330,7 +300,7 @@ class Player {
         }
         else {
             for i in 0..<game.defender.heroesAlive.count {
-                possibilities += [i]
+                possibilities.append(i)
             }
             print("Who do you want to attack ?")
             for i in 0 ..< game.defender.heroesAlive.count {
@@ -386,7 +356,7 @@ class Player {
                         playingHero.weapon = Weapon.allWeapons[joker]
                     }
                     else {
-                        // On pourrait aussi répéter en cas de réponse ni 1 ni 2. Mais si le joueur n'arrive pas à appuyer sur la bonne touche, c'est peut-être imprudent de lui laisser une arme. ;)
+                        // If the answer is not 1 or 2, we could ask to repeat. But if the player is unable to correctly use a keyboard, it is not a got idea to let him use a weapon...
                         print("No change")
                     }
                 }
@@ -406,7 +376,7 @@ class Player {
                         playingHero.weapon = Weapon.allChests[playingHero.ref][joker]
                     }
                     else {
-                        // On pourrait aussi répéter en cas de réponse ni 1 ni 2. Mais si le joueur n'arrive pas à appuyer sur la bonne touche, c'est peut-être imprudent de lui laisser une arme. ;)
+                        /// IIf the answer is not 1 or 2, we could ask to repeat. But if the player is unable to correctly use a keyboard, it is not a got idea to let him use a weapon...
                         print("No change")
                     }
                 }

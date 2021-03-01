@@ -10,7 +10,6 @@ import Foundation
 class Dagger:Weapon {
     override var name: String { "a dagger" }
     override var damage: Int { 15 }
-    override var number:Int { 4 }
     override var heals:Bool { false }
     
     override var barbarianAuthorized:Bool { true }

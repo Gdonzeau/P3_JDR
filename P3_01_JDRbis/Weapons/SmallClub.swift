@@ -10,7 +10,6 @@ import Foundation
 class SmallClub:Weapon {
     override var name: String { "a small club" }
     override var damage: Int { 10 }
-    override var number:Int { 7 }
     override var heals:Bool { false }
     
     override var barbarianAuthorized:Bool { true }

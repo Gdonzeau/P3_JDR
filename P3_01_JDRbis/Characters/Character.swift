@@ -8,20 +8,14 @@
 import Foundation
 
 class Character {
-    //static var allClasses = [Barbarian,Paladin,Druid,Mage] // Boucle for. Utliser i. Quand i=name, créer la classe ainsi sélectionnée
-    static var heroNamesUsed = [String]() // All characters's names
     
-    // All types of Characters
-    static var allClasses = [Barbarian(name: "", weapon: Weapon()),Druid(name: "", weapon: Weapon()),Paladin(name: "", weapon: Weapon()),Mage(name: "", weapon: Weapon())]
-    /*
-     static var allClassesCreator = [Barbarian.init(name: "", weapon: Weapon()),Druid.init(name: "", weapon: Weapon()),Paladin.init(name: "", weapon: Weapon()),Mage.init(name: "", weapon: Weapon())]
-     */
+    static var heroNamesUsed = [String]() // All characters's names
     
     var name:String
     
     init(name:String,weapon:Weapon) {
         self.name = name
-        Character.heroNamesUsed += [name] //each new name is added
+        Character.heroNamesUsed.append(name)//each new name is added
         self.weapon = weapon
     }
     var HPInGame = 10
@@ -116,7 +110,8 @@ class Character {
         }
     }
     // MARK: Compare
-    func compare(compared:Character)->Character { // Utiliser des tuples ?
+    
+    func compare(compared:Character)->Character {
         var retour:Character
         if self.damage > compared.damage { // who makes more damage ?
             retour = self
