@@ -15,6 +15,7 @@ class Game {
     //private var numberOfPlayers = 2 // How many players
     private var numberOfTurns = 0
     
+    
     func startGame() { // ... to start the game, yes !
         
         Weapon.initializingChests()// One chest for each class
@@ -35,7 +36,7 @@ class Game {
             if checkForDraw() { break } // If there are only healers, it is a draw. Put it in commentary to desactivate
             attacker.playTurn()
             attacker.findingSurvivals()
-            changeTurn() // It is the other player's go and we start a new turn
+            changeTurn() // It is the other player's turbn and we start a new turn
         }
         endGame()
     }
@@ -60,14 +61,14 @@ class Game {
     private func whoseTurnIsIt() { // Function to manage whose turn it is.
         self.numberOfTurns += 1 // and how many turns are played
         for player in players {
-            if player.myTurn { // It's my go ?
+            if player.myTurn { // It's my turn ?
                 attacker = player // So I attack
             }
             else {
                 defender = player // and you defend
             }
         }
-        print("\nIt is \(attacker.name)'s go.")
+        print("\nIt is \(attacker.name)'s turn.")
     }
     private func changeTurn() { // I just played, it's your turn.
         players[0].myTurn = !players[0].myTurn

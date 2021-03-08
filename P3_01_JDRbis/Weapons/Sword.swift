@@ -7,9 +7,10 @@
 
 import Foundation
 
-class Sword:Weapon {
-    override var name: String { "a sword" }
+class SwordAndShield:Weapon {
+    override var name: String { "a sword and a shield" }
     override var damage: Int { 30 }
+    override var armor: Int { 20 }
     override var heals:Bool { false }
     
     override var barbarianAuthorized:Bool { true }

@@ -10,6 +10,7 @@ import Foundation
 class HealingSpell:Weapon {
     override var name: String { "a healing spell" }
     override var damage: Int { -30 }
+    override var armor: Int { 0 }
     override var heals:Bool { true }
     
     override var barbarianAuthorized:Bool { false }

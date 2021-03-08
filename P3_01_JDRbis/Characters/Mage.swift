@@ -10,7 +10,7 @@ import Foundation
 class Mage: Character {
     override var ref:Int { 3 }
     override var HPClass:Int { 50 }
-    override var armor:Int { 0 }
+    //override var armor:Int { 0 }
     override var classe:String { "mage" }
     override var hobby:String { "study books" }
     override func presentHimSelf() {

@@ -10,6 +10,7 @@ import Foundation
 class Hammer:Weapon {
     override var name: String { "a hammer" }
     override var damage: Int { 40 }
+    override var armor: Int { 0 }
     override var heals:Bool { false }
     
     override var barbarianAuthorized:Bool { false }

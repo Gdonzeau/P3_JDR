@@ -12,7 +12,7 @@ class Player {
     static var numberOfHeroes:Int = 3
     static var numberOfPlayers = 2
     private let probabilityOfChest = 90 // % of chance that a magical chest appears
-    var myTurn = false // is it your go or not ?
+    var myTurn = false // is it your turn or not ?
     
     private var magicChestChoiceFree = true //When a magicChest appears, does the player can get everyequipment including for other classes ? For example can a Barbarian get (and use) a fireBall ?
     

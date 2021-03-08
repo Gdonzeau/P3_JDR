@@ -32,6 +32,11 @@ class Character {
             return weapon.damage
         }
     }
+    var armor:Int { // Character's armor adapted automatically to the possessed weapon.
+        get {
+            return weapon.armor
+        }
+    }
     var magicProtect:Int { // % of chance that a magical protection cancels the attack. If you don't want any magic protection put 0 to every class.
         get {
             return 0
@@ -40,11 +45,6 @@ class Character {
     var HPClass:Int {
         get {
             return 20
-        }
-    }
-    var armor:Int { // The armor will diminish the HP lost.
-        get {
-            return 0
         }
     }
     var classe:String {

@@ -9,7 +9,7 @@ import Foundation
 
 class Weapon {
     // Chests which contain weapons
-    static var allWeapons = [Axe(),BigHealingSpell(),Dagger(),Flail(),Hammer(),HealingSpell(),Sword(),Fireball(),SmallClub()]
+    static var allWeapons = [Axe(),BigHealingSpell(),Dagger(),Flail(),Hammer(),HealingSpell(),SwordAndShield(),Fireball(),SmallClub()]
     static var barbarianWeapons = [Weapon]()
     static var paladinWeapons = [Weapon]()
     static var druidWeapons = [Weapon]()
@@ -24,6 +24,11 @@ class Weapon {
     var damage:Int {
         get {
             return 10
+        }
+    }
+    var armor:Int {
+        get {
+            return 0
         }
     }
     var heals:Bool { //Does the equipment heal ?
