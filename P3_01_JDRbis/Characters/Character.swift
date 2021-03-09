@@ -76,7 +76,7 @@ class Character {
     
     func actionOn(receiver:Character) { // Character's actions : heal or wound
         var realDamage = 0
-        if self.damage > 0 { // Or : if self.weapon.heals == false // If character wounds
+        if self.damage > 0 {
             
             if receiver.magicProtection() { // If the magic protection actived itself
                 print("\(self.name) attacks \(receiver.name).",
