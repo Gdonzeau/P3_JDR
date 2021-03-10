@@ -61,7 +61,7 @@ class Character {
     //MARK: Introducing
     
     func presentHimSelf() { // The character presents himself
-        print ("Hello, my name if \(self.name), I am a \(self.classe).",
+        print ("Hello, my name is \(self.name), I am a \(self.classe).",
                "\nI have \(HPClass) HP and I am equipped with \(self.weapon.name).")
         if self.damage>0 {
             print("In combat I inflict \(self.damage) wounds of damage.")
@@ -84,14 +84,21 @@ class Character {
             }
             else { // If the magic protection didn't active itself
                 realDamage = self.damage - receiver.armor
+                if realDamage <= 0 { // The armor won't heal, just protect
+                    realDamage = 0
+                    print("\(self.name) attacks \(receiver.name)",
+                          "\nbut \(receiver.name)'s armor blocks the attack.")
+                }
+                else {
                 print("\(self.name) attacks \(receiver.name)",
-                      "\nand inflicts him \(realDamage) wounds of damage.")
+                      "\nand inflicts \(realDamage) wounds of damage on him.")
+                }
             }
         } // If character heals
         else {
             realDamage = self.damage
             print("\(self.name) heals \(receiver.name)",
-                  "\n\(receiver.name) recovers \(-self.damage) PV.")
+                  "\n\(receiver.name) recovers and gets \(-self.damage) HP.")
         }
         
         receiver.HPInGame -= realDamage
