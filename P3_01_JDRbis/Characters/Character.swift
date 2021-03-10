@@ -66,8 +66,15 @@ class Character {
         if self.damage>0 {
             print("In combat I inflict \(self.damage) wounds of damage.")
         }
+        
         else {
             print("In combat I heal \(-self.damage) HP lost.")
+        }
+        if self.armor > 0 {
+            print("I have an armor which gave me a protection of \(self.armor) %.")
+        }
+        if self.magicProtect > 0 {
+            print("I have a magic protection which works at \(self.magicProtect).")
         }
         print("In my spare time, I like to \(self.hobby).")
     }

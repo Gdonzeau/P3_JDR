@@ -77,8 +77,8 @@ class Game {
     private func checkForDraw()->Bool { // If there are only healers left, nobody can win. It is a draw.
         var onlyHealers = true
         for i in 0 ..< Player.numberOfPlayers {
-            for j in 0 ..< Player.numberOfHeroes {
-                if players[i].heroes[j].weapon.heals == false {
+            for j in 0 ..< players[i].heroesAlive.count {
+                if players[i].heroesAlive[j].weapon.heals == false {
                     onlyHealers = false
                     break
                 }
@@ -97,5 +97,6 @@ class Game {
         if players[1].stillAlive() == 0 {
             print("\(players[0].name) won.")
         }
+        self.presentEveryBody()
     }
 }

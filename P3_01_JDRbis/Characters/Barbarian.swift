@@ -14,6 +14,6 @@ class Barbarian: Character {
     override var hobby:String { "start fights at the inn" } // A barbarian is a barbarian...
     override func presentHimSelf() {
         super.presentHimSelf()
-        print("And this is cool !")
+        print("And this is super !")
     }
 }

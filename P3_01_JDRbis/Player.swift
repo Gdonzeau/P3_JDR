@@ -17,7 +17,7 @@ class Player {
     private var magicChestChoiceFree = true //When a magicChest appears, does the player can get every equipment including for other classes ? For example can a Barbarian get (and use) a fireBall ?
     
     var heroes = [Character]()
-    private var heroesAlive = [Character]()
+    var heroesAlive = [Character]()
     
     var name:String
     
@@ -253,7 +253,7 @@ class Player {
         }
         print("Who do you choose for this turn ?")
         for i in 0 ..< self.heroesAlive.count {
-            print("[\(i+1)]. \(self.heroesAlive[i].name)")
+            print("[\(i+1)]. \(self.heroesAlive[i].name) with \(self.heroesAlive[i].weapon.name)")
         }
         if let answer = readLine() {
             var ok = false
