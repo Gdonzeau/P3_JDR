@@ -10,8 +10,8 @@ import Foundation
 class Druid: Character {
     override var ref:Int { 1 }
     override var HPClass:Int { 60 }
-    //override var armor:Int { 0 }
-    override var magicProtect:Int { 20 }
+    //override var magicProtect:Int { 20 }
+    override var magicProtect:Int { 90 } // Version de démonstration
     override var classe:String { "druid" }
     override var hobby:String { "walk in the forest" }
     override func presentHimSelf() {

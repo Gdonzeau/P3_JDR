@@ -12,7 +12,6 @@ class Game {
     var players = [Player]()
     private var attacker = Player(name: "") // Who is the attacker and who is the defender
     var defender = Player(name: "")
-    //private var numberOfPlayers = 2 // How many players
     private var numberOfTurns = 0
     
     

@@ -14,7 +14,7 @@ class Player {
     private let probabilityOfChest = 90 // % of chance that a magical chest appears
     var myTurn = false // is it your turn or not ?
     
-    private var magicChestChoiceFree = true //When a magicChest appears, does the player can get everyequipment including for other classes ? For example can a Barbarian get (and use) a fireBall ?
+    private var magicChestChoiceFree = true //When a magicChest appears, does the player can get every equipment including for other classes ? For example can a Barbarian get (and use) a fireBall ?
     
     var heroes = [Character]()
     private var heroesAlive = [Character]()
@@ -73,6 +73,7 @@ class Player {
         var heroName = ""
         var heroWeapon = Weapon()
         for i in 0 ..< Player.numberOfHeroes {
+            
             // As far as we didn't receive a correct answer...
             while career == 0 { //... for career
                 career = choiceClass(number: i, creator: creator)
@@ -244,7 +245,7 @@ class Player {
         target = Character(name: "", weapon: Weapon())
     }
     
-    private func choiceHero()-> Character {// Let's show which character can play
+    private func choiceHero()-> Character {// Let's choose which character can play
         var retour = Character(name: "", weapon: Weapon())
         var possibilities = [Int]()
         for i in 0..<self.heroesAlive.count {
@@ -274,7 +275,7 @@ class Player {
     private func choiceTarget(heal:Bool)-> Character {
         var retour = Character(name: "", weapon: Weapon())
         var possibilities = [Int]()
-        // We check if the attacker's equipment can attack o heal to propose the appropriated target.
+        // We check if the attacker's equipment can attack or heal to propose the appropriated target.
         if heal {
             for i in 0..<self.heroesAlive.count {
                 possibilities += [i]
@@ -376,7 +377,7 @@ class Player {
                         playingHero.weapon = Weapon.allChests[playingHero.ref][joker]
                     }
                     else {
-                        /// IIf the answer is not 1 or 2, we could ask to repeat. But if the player is unable to correctly use a keyboard, it is not a got idea to let him use a weapon...
+                        /// If the answer is not 1 or 2, we could ask to repeat. But if the player is unable to correctly use a keyboard, it is not a got idea to let him use a weapon...
                         print("No change")
                     }
                 }
