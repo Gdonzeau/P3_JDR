@@ -21,7 +21,7 @@ class Character {
     var HPInGame = 10
     var weapon:Weapon
     
-    var ref:Int { // "column" in the arrays allClasses and allChests
+    var ref:Int { // "column" in the array allChests
         get {
             return -1
         }
@@ -65,16 +65,14 @@ class Character {
                "\nI have \(HPClass) HP and I am equipped with \(self.weapon.name).")
         if self.damage>0 {
             print("In combat I inflict \(self.damage) wounds of damage.")
-        }
-        
-        else {
+        } else {
             print("In combat I heal \(-self.damage) HP lost.")
         }
         if self.armor > 0 {
-            print("I have an armor which gave me a protection of \(self.armor) %.")
+            print("I have an armor which gave me a protection of \(self.armor) pts.")
         }
         if self.magicProtect > 0 {
-            print("I have a magic protection which works at \(self.magicProtect).")
+            print("I have a magic protection which works at \(self.magicProtect) %.")
         }
         print("In my spare time, I like to \(self.hobby).")
     }
@@ -97,8 +95,8 @@ class Character {
                           "\nbut \(receiver.name)'s armor blocks the attack.")
                 }
                 else {
-                print("\(self.name) attacks \(receiver.name)",
-                      "\nand inflicts \(realDamage) wounds of damage on him.")
+                    print("\(self.name) attacks \(receiver.name)",
+                          "\nand inflicts \(realDamage) wounds of damage on him.")
                 }
             }
         } // If character heals
@@ -163,3 +161,5 @@ class Character {
     }
     
 }
+
+ // let randomNumber = Int.random(in: 0 ... 10) // nouveau choix aléatoire

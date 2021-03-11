@@ -25,10 +25,11 @@ class Player {
         self.name = name
     }
     
-    //MARK: CREATION PLAYER
+    // MARK: - CREATION PLAYER
     
-    static func createPlayer() {
-        for i in 0 ..< Player.numberOfPlayers {
+    /// Cette fonction crée les joueurs
+    static func createPlayer() { // -> renvoie un tableau de players
+        for i in 0 ..< Player.numberOfPlayers{
             
             let newPlayer = Player(name: "")
             
@@ -36,7 +37,7 @@ class Player {
             newPlayer.name = giveNamePlayer(number: i)
                 Player.playerNamesUsed.append(newPlayer.name)
             }
-            game.players.append(newPlayer)
+            game.players.append(newPlayer) // Pas POO
         }
     }
     
@@ -66,7 +67,7 @@ class Player {
         return nameDontExist
     }
     
-    // MARK: CREATION HERO
+    // MARK: - CREATION HERO
     
     func creationHero(creator:String) {
         var career = 0
@@ -300,7 +301,7 @@ class Player {
             }
         }
         else {
-            for i in 0..<game.defender.heroesAlive.count {
+            for i in 0..<game.defender.heroesAlive.count { // Pas POO
                 possibilities.append(i)
             }
             print("Who do you want to attack ?")

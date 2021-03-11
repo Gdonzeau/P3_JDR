@@ -9,18 +9,15 @@ import Foundation
 
 class Weapon {
     // Chests which contain weapons
-    static var allWeapons = [Axe(),BigHealingSpell(),Dagger(),Flail(),Hammer(),HealingSpell(),SwordAndShield(),Fireball(),SmallClub()]
+    static let allWeapons = [Axe(),BigHealingSpell(),Dagger(),Flail(),Hammer(),HealingSpell(),SwordAndShield(),Fireball(),SmallClub()]
     static var barbarianWeapons = [Weapon]()
     static var paladinWeapons = [Weapon]()
     static var druidWeapons = [Weapon]()
     static var mageWeapons = [Weapon]()
     static var allChests = [barbarianWeapons,druidWeapons,paladinWeapons,mageWeapons]
     
-    var name:String {
-        get {
-            return "nothing"
-        }
-    }
+    var name:String {"nothing"} // Pareil que get
+    
     var damage:Int {
         get {
             return 10

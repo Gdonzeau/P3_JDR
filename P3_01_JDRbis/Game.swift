@@ -9,7 +9,7 @@ import Foundation
 
 class Game {
     
-    var players = [Player]()
+    var players = [Player]() // = tableau create player
     private var attacker = Player(name: "") // Who is the attacker and who is the defender
     var defender = Player(name: "")
     private var numberOfTurns = 0
@@ -19,13 +19,13 @@ class Game {
         
         Weapon.initializingChests()// One chest for each class
         
-        Player.createPlayer()
+        Player.createPlayer() // renvoie un tableau de player
         
         for i in 0 ..< Player.numberOfPlayers {
             players[i].creationHero(creator:players[i].name)
         }
         
-        self.presentEveryBody()
+        presentEveryBody()
         
         throwCoin() // Who starts ?
         
@@ -72,6 +72,8 @@ class Game {
     private func changeTurn() { // I just played, it's your turn.
         players[0].myTurn = !players[0].myTurn
         players[1].myTurn = !players[1].myTurn
+        
+        //players[1].myTurn.toggle()
     }
     
     private func checkForDraw()->Bool { // If there are only healers left, nobody can win. It is a draw.
@@ -84,7 +86,7 @@ class Game {
                 }
             }
         }
-        if onlyHealers {print("There are no more fighters able to wouhd. This is a draw.")}
+        if onlyHealers {print("There are no more fighters able to wound. This is a draw.")}
         return onlyHealers
     }
     
@@ -97,6 +99,6 @@ class Game {
         if players[1].stillAlive() == 0 {
             print("\(players[0].name) won.")
         }
-        self.presentEveryBody()
+        presentEveryBody()
     }
 }
