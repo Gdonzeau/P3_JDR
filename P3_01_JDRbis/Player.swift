@@ -14,6 +14,12 @@ class Player {
     private let probabilityOfChest = 90 // % of chance that a magical chest appears
     var myTurn = false // is it your turn or not ?
     
+    // Modif ter
+    static var players = [Player]() // = tableau create player
+    static var attacker = Player(name: "") // Who is the attacker and who is the defender
+    static var defender = Player(name: "")
+    // Fin des modifs ter
+    
     private var magicChestChoiceFree = true //When a magicChest appears, does the player can get every equipment including for other classes ? For example can a Barbarian get (and use) a fireBall ?
     
     var heroes = [Character]()
@@ -37,7 +43,7 @@ class Player {
             newPlayer.name = giveNamePlayer(number: i)
                 Player.playerNamesUsed.append(newPlayer.name)
             }
-            game.players.append(newPlayer) // Pas POO
+            players.append(newPlayer)
         }
     }
     
@@ -49,8 +55,7 @@ class Player {
             
             if checkNamePlayer(nameToCheck:answer) {
                 retour = answer
-            }
-            else {
+            } else {
                 print("This name is not available.")
             }
         }
@@ -116,7 +121,7 @@ class Player {
         }
     }
     
-    //MARK: Choice class
+    // MARK: - Choice class
     
     private func choiceClass(number:Int,creator:String)->Int {
         var response = 0
@@ -132,15 +137,14 @@ class Player {
                     response = retour
                     // If we receive an optionnal, type Int which is 1,2,3 or 4 we go on.
                 }
-            }
-            else {
+            } else {
                 print("I didn't understand, please repeat.")
             }
         }
         return response
     }
     
-    //MARK: Choice weapon
+    // MARK: - Choice weapon
     
     private func choiceWeapon(career:Int) -> Weapon {
         var retour = Weapon()
@@ -166,7 +170,7 @@ class Player {
         return retour
     }
     
-    //MARK: Which Weapon for who ?
+    // MARK: - Which Weapon for who ?
     
     private func defineWeapons(name:String) ->Weapon {
         var retour = Weapon()
@@ -178,7 +182,7 @@ class Player {
         return retour
     }
     
-    //MARK: Giving name
+    // MARK: - Giving name
     
     private func giveNameHero(number:Int,creator:String)->String { // Let's give a name
         var retour:String = ""
@@ -189,15 +193,14 @@ class Player {
             if checkNameHero(nameToCheck:answer) {
                 retour = answer
                 Character.heroNamesUsed += [retour]
-            }
-            else {
+            } else {
                 print("\nName already choosen.\n")
             }
         }
         return retour
     }
     
-    //MARK: Checking name
+    // MARK: - Checking name
     
     private func checkNameHero(nameToCheck:String)->Bool {
         var nameDontExist = true
@@ -209,11 +212,11 @@ class Player {
         return nameDontExist
     }
     
-    //MARK: END CREATION
+    // MARK: - END CREATION
     
     
     
-    //MARK: PLAY
+    // MARK: - PLAY
     
     func stillAlive()->Int { // Checking total heroes' HP left
         var retour = 0
@@ -224,7 +227,7 @@ class Player {
         return retour
     }
     
-    //MARK: TURN - MAIN FUNCTION
+    // MARK: - TURN - MAIN FUNCTION
     
     func playTurn() {
         var heroActivated = Character(name: "", weapon: Weapon())
@@ -299,20 +302,19 @@ class Player {
                     print("Please repeat.")
                 }
             }
-        }
-        else {
-            for i in 0..<game.defender.heroesAlive.count { // Pas POO
+        } else {
+            for i in 0..<Player.defender.heroesAlive.count { // Pas POO
                 possibilities.append(i)
             }
             print("Who do you want to attack ?")
-            for i in 0 ..< game.defender.heroesAlive.count {
-                print("[\(i+1)]. \(game.defender.heroesAlive[i].name) the \(game.defender.heroesAlive[i].classe) who has \(game.defender.heroesAlive[i].HPInGame) HP left.")
+            for i in 0 ..< Player.defender.heroesAlive.count {
+                print("[\(i+1)]. \(Player.defender.heroesAlive[i].name) the \(Player.defender.heroesAlive[i].classe) who has \(Player.defender.heroesAlive[i].HPInGame) HP left.")
             }
             if let answer = readLine() {
                 var ok = false
                 for test in possibilities {
                     if test+1 == Int(answer) {
-                        retour = game.defender.heroesAlive[test]
+                        retour = Player.defender.heroesAlive[test]
                         print("All right.")
                         ok = true
                         break
@@ -326,26 +328,27 @@ class Player {
         return retour
     }
     
-    //MARK: WHO IS ALIVE
+    // MARK: - WHO IS ALIVE
     
     func findingSurvivals() { // Checking who is still alive. Updating array heroesAlive
-        game.defender.heroesAlive = [Character]() // Let's empty the array.
+        Player.defender.heroesAlive = [Character]() // Let's empty the array.
         for i in 0 ..< Player.numberOfHeroes { // And let's build it again
-            if game.defender.heroes[i].HPInGame > 0 {
-                game.defender.heroesAlive.append(game.defender.heroes[i])
+            if Player.defender.heroes[i].HPInGame > 0 {
+                Player.defender.heroesAlive.append(Player.defender.heroes[i])
             }
         }
     }
     
-    // MARK: THE MAGIC CHEST
+    // MARK: - THE MAGIC CHEST
     
     private func magicChest(playingHero:Character) {
         var joker = Int()
-        if Int(arc4random_uniform(UInt32(100)))+1 <= probabilityOfChest { // We throw a D100 to know if a chest appears
+       
+            if Int.random(in: 1 ... 100) <= probabilityOfChest {
             print("A chest appears in front of \(playingHero.name)")
             if magicChestChoiceFree {
                 // Generic Chest
-                joker = Int(arc4random_uniform(UInt32(Weapon.allWeapons.count)))
+                joker = Int.random(in: 0 ..< Weapon.allWeapons.count)
                 print("The chest contains \(Weapon.allWeapons[joker].name)")
                 print("Do you want to exchange \(playingHero.weapon.name) for \(Weapon.allWeapons[joker].name)")
                 
@@ -356,16 +359,14 @@ class Player {
                     if Int(choice) == 1 {
                         print("Let's change.")
                         playingHero.weapon = Weapon.allWeapons[joker]
-                    }
-                    else {
+                    } else {
                         // If the answer is not 1 or 2, we could ask to repeat. But if the player is unable to correctly use a keyboard, it is not a got idea to let him use a weapon...
                         print("No change")
                     }
                 }
-            }
-            else {
+            } else {
                 // Personnal chest
-                joker = Int(arc4random_uniform(UInt32(Weapon.allChests[playingHero.ref].count)))
+                joker = Int.random(in: 0 ..< Weapon.allChests[playingHero.ref].count)
                 print("The chest contains \(Weapon.allChests[playingHero.ref][joker].name)")
                 print("Do you want to exchange \(playingHero.weapon.name) for \(Weapon.allChests[playingHero.ref][joker].name)")
                 
@@ -376,9 +377,8 @@ class Player {
                     if Int(choice) == 1 {
                         print("Let's change.")
                         playingHero.weapon = Weapon.allChests[playingHero.ref][joker]
-                    }
-                    else {
-                        /// If the answer is not 1 or 2, we could ask to repeat. But if the player is unable to correctly use a keyboard, it is not a got idea to let him use a weapon...
+                    } else {
+                        // If the answer is not 1 or 2, we could ask to repeat. But if the player is unable to correctly use a keyboard, it is not a got idea to let him use a weapon...
                         print("No change")
                     }
                 }

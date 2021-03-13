@@ -21,44 +21,15 @@ class Character {
     var HPInGame = 10
     var weapon:Weapon
     
-    var ref:Int { // "column" in the array allChests
-        get {
-            return -1
-        }
-    }
+    var ref:Int {-1} // "column" in the array allChests
+    var damage:Int {weapon.damage} // Character's damage adapted automatically to the possessed weapon.
+    var armor:Int {weapon.armor} // Character's armor adapted automatically to the possessed weapon.
+    var magicProtect:Int {0} // % of chance that a magical protection cancels the attack. If you don't want any magic protection put 0 to every class.
+    var HPClass:Int {20}
+    var classe:String {"a character"}
+    var hobby:String {"to sleep"}
     
-    var damage:Int { // Character's damage adapted automatically to the possessed weapon.
-        get {
-            return weapon.damage
-        }
-    }
-    var armor:Int { // Character's armor adapted automatically to the possessed weapon.
-        get {
-            return weapon.armor
-        }
-    }
-    var magicProtect:Int { // % of chance that a magical protection cancels the attack. If you don't want any magic protection put 0 to every class.
-        get {
-            return 0
-        }
-    }
-    var HPClass:Int {
-        get {
-            return 20
-        }
-    }
-    var classe:String {
-        get {
-            return "a character"
-        }
-    }
-    var hobby:String {
-        get {
-            return "to sleep"
-        }
-    }
-    
-    //MARK: Introducing
+    // MARK: - Introducing
     
     func presentHimSelf() { // The character presents himself
         print ("Hello, my name is \(self.name), I am a \(self.classe).",
@@ -77,7 +48,7 @@ class Character {
         print("In my spare time, I like to \(self.hobby).")
     }
     
-    // MARK: Fighting
+    // MARK: - Fighting
     
     func actionOn(receiver:Character) { // Character's actions : heal or wound
         var realDamage = 0
@@ -86,21 +57,18 @@ class Character {
             if receiver.magicProtection() { // If the magic protection actived itself
                 print("\(self.name) attacks \(receiver.name).",
                       "\n\(receiver.name)'s magic protection activates ! The attack is stopped !")
-            }
-            else { // If the magic protection didn't active itself
+            } else { // If the magic protection didn't active itself
                 realDamage = self.damage - receiver.armor
                 if realDamage <= 0 { // The armor won't heal, just protect
                     realDamage = 0
                     print("\(self.name) attacks \(receiver.name)",
                           "\nbut \(receiver.name)'s armor blocks the attack.")
-                }
-                else {
+                } else {
                     print("\(self.name) attacks \(receiver.name)",
                           "\nand inflicts \(realDamage) wounds of damage on him.")
                 }
             }
-        } // If character heals
-        else {
+        } else {
             realDamage = self.damage
             print("\(self.name) heals \(receiver.name)",
                   "\n\(receiver.name) recovers and gets \(-self.damage) HP.")
@@ -121,28 +89,23 @@ class Character {
             print("\(receiver.name) is dead.")
         }
     }
-    // MARK: Compare
+    // MARK: - Compare
     
     func compare(compared:Character)->Character {
         var retour:Character
-        if self.damage > compared.damage { // who makes more damage ?
+        if damage > compared.damage { // who makes more damage ?
             retour = self
-        }
-        else if self.damage < compared.damage {
+        } else if damage < compared.damage {
             retour = compared
-        }
-        else { // Same damages ? How about HP ?
-            if self.HPClass > compared.HPClass {
+        } else { // Same damages ? How about HP ?
+            if HPClass > compared.HPClass {
                 retour = self
-            }
-            else if self.HPClass < compared.HPClass {
+            } else if HPClass < compared.HPClass {
                 retour = compared
-            }
-            else { // Same HP ? So who lost less HP. If draw, self wins.
-                if self.HPInGame < compared.HPInGame {
+            } else { // Same HP ? So who lost less HP. If draw, self wins.
+                if HPInGame < compared.HPInGame {
                     retour = compared
-                }
-                else {
+                } else {
                     retour = self
                 }
             }
@@ -150,16 +113,14 @@ class Character {
         return retour
     }
     
-    // MARK: Magic protection
+    // MARK: - Magic protection
     private func magicProtection()->Bool { // Does magic protection work ?
-        if Int(arc4random_uniform(UInt32(100)))+1 < self.magicProtect {
+        let randomNumber = Int.random(in: 1 ... 100)
+            if randomNumber < magicProtect {
             return true
-        }
-        else {
+        } else {
             return false
         }
     }
     
 }
-
- // let randomNumber = Int.random(in: 0 ... 10) // nouveau choix aléatoire

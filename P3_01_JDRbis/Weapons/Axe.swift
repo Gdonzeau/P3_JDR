@@ -9,7 +9,7 @@ import Foundation
 
 class Axe:Weapon {
     override var name: String { "an axe" }
-    override var damage: Int { 40 }
+    override var damage: Int { 35 }
     override var armor: Int { 0 }
     override var heals:Bool { false }
     

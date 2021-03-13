@@ -18,42 +18,16 @@ class Weapon {
     
     var name:String {"nothing"} // Pareil que get
     
-    var damage:Int {
-        get {
-            return 10
-        }
-    }
-    var armor:Int {
-        get {
-            return 0
-        }
-    }
-    var heals:Bool { //Does the equipment heal ?
-        get {
-            return false
-        }
-    }
+    var damage:Int {10}
+    var armor:Int {0}
+    var heals:Bool {false} //Does the equipment heal ?
+
     // Who can use this piece of equipment ?
-    var barbarianAuthorized:Bool {
-        get {
-            return true
-        }
-    }
-    var druidAuthorized:Bool {
-        get {
-            return true
-        }
-    }
-    var paladinAuthorized:Bool {
-        get {
-            return true
-        }
-    }
-    var mageAuthorized:Bool {
-        get {
-            return true
-        }
-    }
+    var barbarianAuthorized:Bool {true}
+    var druidAuthorized:Bool {true}
+    var paladinAuthorized:Bool {true}
+    var mageAuthorized:Bool {true}
+        
     static func initializingChests() { // Each class has its own chest
         for stuff in Weapon.allWeapons {
             if stuff.barbarianAuthorized {
